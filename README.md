@@ -1,24 +1,43 @@
-# README
+# Billing & Recurring Payment System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The Project is about subscription system. Where Admin can make new Features and add theme in Plans while Buyer can subscribe to these plans.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+What things you need to install the software and how to install them
 
-* Database creation
+```
+Ruby on Rails
+```
 
-* Database initialization
+### Installing
 
-* How to run the test suite
+A step by step series of examples that tell you how to get a development env running
 
-* Services (job queues, cache servers, search engines, etc.)
+Say what the step will be
 
-* Deployment instructions
+```
+Give the example
+```
 
-* ...
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Authors
+
+* **Muhammad Tayyab**
+
+See also the list of [contributors](https://github.com/tayyab-devsinc/tyb_demo_app/contributors) who participated in this project.
+
+## Acknowledgments
+
+* Devsinc
