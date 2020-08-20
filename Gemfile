@@ -34,7 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-
+gem 'carrierwave'
+gem 'rmagick'
+gem "paperclip"
 # gem 'bootstrap', '~> 4.5.0'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
