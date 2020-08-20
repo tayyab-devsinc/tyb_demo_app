@@ -1,0 +1,11 @@
+<%= form_for(@feature) do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control', required: true%>
+<%= f.label :code %>
+<%= f.text_field :code, class: 'form-control', required: true %>
+<%= f.label :unit_price %>
+<%= f.number_field :unit_price, class: 'form-control', required: true %>
+<%= f.label :max_unit_price, "Max Unit Limit" %>
+<%= f.number_field :max_unit_price, class: 'form-control', required: true %>
+<%= f.submit "Add Feature", class: "btn btn-primary" %>
+<% end %>
