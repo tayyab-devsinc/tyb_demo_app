@@ -1,22 +1,19 @@
 <% provide(:title, 'All users') %>
 <h1>All Features</h1>
- <table>
+<div class='col-md-3'>
+  <%= button_to 'Add New Feature', new_feature_path, method: :get, class: 'btn btn-primary' %>
+  <br>
+</div>
+<table class="table">
   <tr>
-    <th>Title</th>
-    <th>Summary</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Price</th>
+    <th>Units</th>
+    <th>Actions</th>
   </tr>
- 
-<% @features.each do |book| %>
-  <tr>
-    <td><%= book.name %></td>
-    <td><%= book.code %></td>
-    <td><%= link_to 'Show', book %></td>
-  </tr>
-<% end %>
+  <tbody class='tbody'>
+  <%= render @features %>
+  </tbody>
 </table>
- 
-<br />
- 
+<%= will_paginate %>

@@ -1,0 +1,8 @@
+<tr>
+  <td><%= feature.name %></td>
+  <td><%= feature.code %></td>
+  <td><%= feature.unit_price %></td>
+  <td><%= feature.max_unit_limit %></td>
+  <td><%= link_to 'Edit', edit_feature_path(feature) %>
+    <%= link_to 'Destroy', feature, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>

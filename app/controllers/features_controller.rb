@@ -4,7 +4,7 @@ class FeaturesController < ApplicationController
   before_action :admin_user, except: [:index]
 
   def index
-    @features = Feature.all
+    @features = Feature.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -22,10 +22,29 @@ class FeaturesController < ApplicationController
     end
   end
 
+  def edit
+    @feature = Feature.find(params[:id])
+  end
+
+  def update
+    @feature = Feature.find(params[:id])
+    if @feature.update_attributes(feature_params)
+      flash[:success] = 'Successfully Updated'
+      redirect_to features_url
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    Feature.find(params[:id]).destroy
+    flash[:success] = 'Feature deleted'
+    redirect_to features_url
+  end
+
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
-
 
   private
 
