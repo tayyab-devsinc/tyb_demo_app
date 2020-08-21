@@ -9,7 +9,6 @@ $gray-medium-light: #eaeaea;
   box-sizing: border-box;
 }
 
-/* universal */
 body {
   padding-top: 60px;
 }
@@ -30,7 +29,6 @@ textarea {
   }
 }
 
-/* typography */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -56,7 +54,6 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
 #logo {
   float: left;
   margin-right: 10px;
@@ -73,7 +70,6 @@ p {
   }
 }
 
-/* footer */
 footer {
   margin-top: 45px;
   padding-top: 5px;
@@ -103,7 +99,6 @@ footer {
   }
 }
 
-/* miscellaneous */
 .debug_dump {
   clear: both;
   float: left;
@@ -112,7 +107,6 @@ footer {
   @include box_sizing;
 }
 
-/* forms */
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -154,114 +148,4 @@ input {
 #session_remember_me {
   width: auto;
   margin-left: 0;
-}
-
-/* Users index */
-.users {
-  list-style: none;
-  margin: 0;
-
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
-}
-
-/* microposts */
-.microposts {
-  list-style: none;
-  padding: 0;
-
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-
-  .content {
-    display: block;
-    margin-left: 60px;
-
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
-
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-  }
-}
-
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-
-span.picture {
-  margin-top: 10px;
-
-  input {
-    border: 0;
-  }
-}
-
-
-.stats {
-  overflow: auto;
-  margin-top: 0;
-  padding: 0;
-
-  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid $gray-lighter;
-    color: gray;
-
-    &:first-child {
-      padding-left: 0;
-      border: 0;
-    }
-
-    &:hover {
-      text-decoration: none;
-      color: blue;
-    }
-  }
-
-  strong {
-    display: block;
-  }
-}
-
-.user_avatars {
-  overflow: auto;
-  margin-top: 10px;
-
-  .gravatar {
-    margin: 1px 1px;
-  }
-
-  a {
-    padding: 0;
-  }
-}
-
-.users.follow {
-  padding: 0;
 }
