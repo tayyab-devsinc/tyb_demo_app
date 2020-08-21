@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200821070641) do
+ActiveRecord::Schema.define(version: 20200821075906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20200821070641) do
     t.string "name"
     t.string "code"
     t.float "unit_price"
-    t.integer "max_unit_price"
+    t.integer "max_unit_limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_features_on_code"
