@@ -1,6 +1,7 @@
 <tr>
   <td><%= plan.name %></td>
   <td><%= plan.monthly_fee %></td>
+  <td><%= plan.features.map(&:name).join(', ') %></td>
   <% if (current_user.admin?) %>
     <td>
       <%= link_to 'Edit', edit_plan_path(plan) %>

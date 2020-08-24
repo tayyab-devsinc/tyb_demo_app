@@ -9,10 +9,12 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
+    @features = Feature.all
   end
 
   def create
     @plan = Plan.new(plan_params)
+    print(@selected)
     if @plan.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to plans_url
