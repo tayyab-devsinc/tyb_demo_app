@@ -9,12 +9,18 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @features = Feature.all
   end
 
   def create
-    @plan = Plan.new(plan_params)
-    print(@selected)
+    @plan = Plan.new
+    @plan.name = plan_params[:name]
+    monthly_fee = 0.0
+    plan_params[:features].each do |fid|
+      fr = Feature.find(fid)
+      monthly_fee += (fr.unit_price * fr.max_unit_limit)
+      @plan.features << fr
+    end
+    @plan.monthly_fee = monthly_fee
     if @plan.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to plans_url
@@ -51,6 +57,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :monthly_fee)
+    params.require(:plan).permit(:name, :monthly_fee, features: [])
   end
 end
