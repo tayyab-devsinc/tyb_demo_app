@@ -1,0 +1,7 @@
+<%= form_for(@plan) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control', required: true %>
+  <%= f.label :monthly_fee %>
+  <%= f.number_field :monthly_fee, class: 'form-control', required: true %>
+  <%= f.submit labels[:button], class: "btn btn-primary" %>
+<% end %>

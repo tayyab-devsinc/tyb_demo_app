@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#home' 
+  root 'static_pages#home'
 
   get '/home', to: 'static_pages#home'
 
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
 
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   resources :features
+  resources :plans
 end
