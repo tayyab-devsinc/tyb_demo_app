@@ -7,9 +7,8 @@ class SubscriptionsController < ApplicationController
     @subscriptions = if current_user.admin?
                        Subscription.paginate(page: params[:page], per_page: 10)
                      else
-                       Subscription.where(:user_id => current_user.id).paginate(page: params[:page], per_page: 10)
+                       current_user.subscriptions.paginate(page: params[:page], per_page: 10)
                      end
-
   end
 
   def destroy
