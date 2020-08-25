@@ -11,4 +11,8 @@ class User < ApplicationRecord
   validates_integrity_of :profile_photo
   validates_processing_of :profile_photo
 
+  def subscriptions?(plan)
+    Subscription.find_by(user_id: id, plan_id: plan.id)
+  end
+
 end

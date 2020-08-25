@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :plans
   devise_for :users
 
+  resources :subscriptions do
+    post :subscribe
+    delete :unsubscribe
+  end
+
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
   get '/contact', to: 'static_pages#contact'

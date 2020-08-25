@@ -8,6 +8,10 @@
       <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'} %>
     </td>
   <% else %>
-  <td><%= link_to 'Subscribe', '#' %></td>
+    <% if current_user.subscriptions?(plan) %>
+      <td><%= link_to 'UnSubscribe', subscription_unsubscribe_path(plan), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    <% else %>
+      <td><%= link_to 'Subscribe', subscription_subscribe_path(plan), method: :post %></td>
+    <% end %>
   <% end %>
 </tr>
