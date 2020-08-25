@@ -11,9 +11,7 @@
     <th>Name</th>
     <th>Fee</th>
     <th>Features</th>
-    <% if current_user.admin? %>
-      <th>Actions</th>
-    <% end %>
+    <th>Actions</th>
   </tr>
   <tbody class='tbody'>
   <%= render @plans %>

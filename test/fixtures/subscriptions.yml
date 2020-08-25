@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  plan_id: one
+  active: false
+  billing_date: MyString
+
+two:
+  user_id: two
+  plan_id: two
+  active: false
+  billing_date: MyString

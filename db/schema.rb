@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200819050308) do
+ActiveRecord::Schema.define(version: 20200825092616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20200819050308) do
     t.index ["name"], name: "index_plans_on_name"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "users_id", null: false
+    t.bigint "plans_id", null: false
+    t.boolean "active", default: true, null: false
+    t.string "billing_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "users_id", "plans_id"], name: "index_subscriptions_on_id_and_users_id_and_plans_id", unique: true
+    t.index ["plans_id"], name: "index_subscriptions_on_plans_id"
+    t.index ["users_id"], name: "index_subscriptions_on_users_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,4 +67,6 @@ ActiveRecord::Schema.define(version: 20200819050308) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "subscriptions", "plans", column: "plans_id"
+  add_foreign_key "subscriptions", "users", column: "users_id"
 end
