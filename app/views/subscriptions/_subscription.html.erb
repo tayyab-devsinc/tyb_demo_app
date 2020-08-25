@@ -1,0 +1,10 @@
+<tr>
+  <td><%= subscription.created_at.strftime('%F') %></td>
+  <td><%= subscription.user.name %></td>
+  <td><%= subscription.plan.name %></td>
+  <td><%= subscription.active %></td>
+  <td>
+    <%= link_to 'Activation', subscription, method: :put %>
+    <%= link_to 'Cancel', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+  </td>
+</tr>
