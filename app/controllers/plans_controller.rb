@@ -15,7 +15,7 @@ class PlansController < ApplicationController
     @plan = Plan.new
     @plan.name = plan_params[:name]
     monthly_fee = 0.0
-    plan_params[:features].each do |fid|
+    plan_params[:features]&.each do |fid|
       fr = Feature.find(fid)
       monthly_fee += (fr.unit_price * fr.max_unit_limit)
       @plan.features << fr
@@ -36,7 +36,17 @@ class PlansController < ApplicationController
 
   def update
     @plan = Plan.find(params[:id])
-    if @plan.update_attributes(plan_params)
+    @plan.name = plan_params[:name]
+    monthly_fee = @plan.monthly_fee
+    plan_params[:features]&.each do |fid|
+      fr = Feature.find(fid)
+      unless @plan.features.include?(fr)
+        monthly_fee += (fr.unit_price * fr.max_unit_limit)
+        @plan.features << fr unless @plan.features.include?(fr)
+      end
+    end
+    @plan.monthly_fee = monthly_fee
+    if @plan.save
       flash[:success] = 'Successfully Updated'
       redirect_to plans_url
     else

@@ -1,6 +1,6 @@
 <%= form_for(@plan) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control', required: true %>
-  <%= f.select :features, Feature.all.collect { |x| [x.name, x.id]}, {:include_hidden => false}, :multiple => true %>
-  <%= f.submit labels[:button], class: "btn btn-primary" %>
+  <%= f.select :features, Feature.all.collect { |x| [x.name, x.id] }, {:include_hidden => false}, :multiple => true %>
+  <%= f.submit labels[:button], class: 'btn btn-primary' %>
 <% end %>
