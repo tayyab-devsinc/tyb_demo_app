@@ -1,0 +1,20 @@
+<tr>
+  <td><%= transaction.created_at.strftime('%F') %></td>
+  <% if transaction.user!=nil%>
+  <td><%= transaction.user.name %></td>
+  <%else %>
+  <td>Not Found</td>
+  <%end %>
+  <% if transaction.subscription!=nil%>
+  <td><%= transaction.subscription.plan.name %></td>
+  <td><%= transaction.subscription.active %></td>
+    <%else %>
+    <td>Cancelled</td>
+    <td>false</td>
+  <%end %>
+  <td><%= transaction.amount %></td>
+<!--  <td>-->
+    <%#= link_to 'Activation', subscription, method: :put %>
+    <%#= link_to 'Cancel', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+<!--  </td>-->
+</tr>

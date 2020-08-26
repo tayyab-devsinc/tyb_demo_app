@@ -1,0 +1,15 @@
+<% provide(:title, 'Transactions') %>
+<h1>All Transactions</h1>
+<table class='table'>
+  <tr>
+    <th>Transaction Date</th>
+    <th>User</th>
+    <th>Subscription Plan</th>
+    <th>Subscription Active</th>
+    <th>Amount</th>
+  </tr>
+  <tbody class='tbody'>
+  <%= render @transactions %>
+  </tbody>
+</table>
+<%= will_paginate %>

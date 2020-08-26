@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   has_many :plans, through: :subscriptions
   has_many :transactions, through: :subscriptions
 
