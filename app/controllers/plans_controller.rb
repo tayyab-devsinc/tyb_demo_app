@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index]
+  before_action :admin_user, except: [:index, :show]
 
   def index
     @plans = Plan.paginate(page: params[:page], per_page: 10)
