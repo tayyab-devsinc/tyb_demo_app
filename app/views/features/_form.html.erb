@@ -4,8 +4,8 @@
   <%= f.label :code %>
   <%= f.text_field :code, class: 'form-control', required: true %>
   <%= f.label :unit_price %>
-  <%= f.number_field :unit_price, class: 'form-control', required: true %>
-  <%= f.label :max_unit_limit, "Max Unit Limit" %>
-  <%= f.number_field :max_unit_limit, class: 'form-control', required: true %>
-  <%= f.submit labels[:button], class: "btn btn-primary" %>
+  <%= f.number_field :unit_price, class: 'form-control', required: true, min: 0 %>
+  <%= f.label :max_unit_limit, 'Max Unit Limit' %>
+  <%= f.number_field :max_unit_limit, class: 'form-control', required: true, min: 0 %>
+  <%= f.submit labels[:button], class: 'btn btn-primary' %>
 <% end %>

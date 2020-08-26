@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :features
-  resources :plans
   devise_for :users
+
+  resources :features
+
+  resources :plans
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
