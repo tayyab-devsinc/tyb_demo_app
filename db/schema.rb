@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200826123039) do
+ActiveRecord::Schema.define(version: 20200826142551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 20200826123039) do
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
     t.index ["user_id", "subscription_id"], name: "index_transactions_on_user_id_and_subscription_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
+  create_table "usages", force: :cascade do |t|
+    t.bigint "subscription_id"
+    t.integer "feature_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end
 
   create_table "users", force: :cascade do |t|

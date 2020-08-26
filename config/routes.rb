@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :transactions
+  resources :usages
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
