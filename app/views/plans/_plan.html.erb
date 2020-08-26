@@ -1,5 +1,5 @@
 <tr>
-  <td><%= plan.name %></td>
+  <td><%= link_to plan.name, plan %></td>
   <td><%= plan.monthly_fee %></td>
   <td><%= plan.features.map(&:name).join(', ') %></td>
   <% if (current_user.admin?) %>
