@@ -37,13 +37,12 @@ class PlansController < ApplicationController
   def update
     @plan = Plan.find(params[:id])
     @plan.name = plan_params[:name]
-    monthly_fee = @plan.monthly_fee
+    @plan.features.clear
+    monthly_fee = 0.0
     plan_params[:features]&.each do |fid|
       fr = Feature.find(fid)
-      unless @plan.features.include?(fr)
-        monthly_fee += (fr.unit_price * fr.max_unit_limit)
-        @plan.features << fr unless @plan.features.include?(fr)
-      end
+      monthly_fee += (fr.unit_price * fr.max_unit_limit)
+      @plan.features << fr unless @plan.features.include?(fr)
     end
     @plan.monthly_fee = monthly_fee
     if @plan.save
