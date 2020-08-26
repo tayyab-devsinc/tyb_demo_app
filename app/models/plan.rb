@@ -3,5 +3,11 @@ class Plan < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
   validates :name, presence: true, length: { maximum: 50 }
-  validates :monthly_fee, presence: true
+
+  def monthly_fee
+    fee = 0.0
+    features.each { |f| fee += f.unit_price * f.max_unit_limit }
+    fee
+  end
+
 end
