@@ -1,28 +1,19 @@
 class FeaturesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, except: [:index]
-  before_action :create_feature_instance, only: [:new]
-  before_action :feature_instance, only: [:edit,:update]
-
-  def index
-    @features = Feature.paginate(page: params[:page], per_page: 10)
-  end
-
-  def new
-  end
+  before_action :initialize_feature, only: [:new, :create]
+  before_action :set_feature, only: [:edit,:update]
+  before_action :set_features, only: [:index]
 
   def create
-    feature = Feature.new(feature_params)
-    if feature.save
+    @feature.attributes = feature_params
+    if @feature.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to features_url
     else
       flash[:danger] = 'Error occurred, Try Again'
       render 'new'
     end
-  end
-
-  def edit
   end
 
   def update
@@ -46,15 +37,16 @@ class FeaturesController < ApplicationController
     params.require(:feature).permit(:name, :code, :unit_price, :max_unit_limit)
   end
 
-  def create_feature_instance
+  def initialize_feature
     @feature = Feature.new
   end
 
-  def feature_instance
+  def set_feature
     @feature = Feature.find(params[:id])
   end
 
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
+  def set_features
+    @features = Feature.paginate(page: params[:page], per_page: 10)
   end
+
 end

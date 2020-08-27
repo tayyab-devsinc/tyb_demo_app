@@ -1,30 +1,21 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, except: [:index]
-  before_action :create_plan_instance, only: [:new]
-  before_action :plan_instance, only: [:edit, :update]
-
-  def index
-    @plans = Plan.paginate(page: params[:page], per_page: 10)
-  end
-
-  def new
-  end
+  before_action :initiate_plan, only: [:new, :create]
+  before_action :set_all_features, only: [:new, :create]
+  before_action :set_plan, only: [:edit, :update]
+  before_action :set_plans, only: [:index]
 
   def create
-    params = { name: plan_params[:name] }
-    plan = Plan.new(params)
-    plan.add_features(plan_params[:features])
-    if plan.save
-      flash[:success] = 'Feature Successfully Added'
-      redirect_to plans_url
-    else
-      flash[:danger] = 'Error occurred, Try Again'
-      render 'new'
-    end
-  end
-
-  def edit
+    print("\n\n IN CREATE : #{plan_params} \n\n")
+    # @plan.attributes = plan_params
+    # if @plan.save
+    #   flash[:success] = 'Feature Successfully Added'
+    #   redirect_to plans_url
+    # else
+    #   flash[:danger] = 'Error occurred, Try Again'
+    #   render 'new'
+    # end
   end
 
   def update
@@ -48,18 +39,25 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :monthly_fee, features: [])
+    print("\nFROM FORM : #{params}\n\n")
+    params.require(:plan).permit(:name, :monthly_fee, feature: [])
   end
 
-  def create_plan_instance
+  def initiate_plan
     @plan = Plan.new
+    @plan_features = @plan.features.build
   end
 
-  def plan_instance
+  def set_plan
     @plan = Plan.find(params[:id])
   end
 
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
+  def set_plans
+    @plans = Plan.preload(:features).paginate(page: params[:page], per_page: 10)
   end
+
+  def set_all_features
+    @all_features = Feature.all.collect { |x| [x.name, x.id] }
+  end
+
 end

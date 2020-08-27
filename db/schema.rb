@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20200824113724) do
   create_table "features", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
-    t.float "unit_price", null: false
-    t.integer "max_unit_limit", null: false
+    t.float "unit_price", default: 0.0, null: false
+    t.integer "max_unit_limit", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_features_on_code"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20200824113724) do
 
   create_table "plans", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "monthly_fee", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_plans_on_name"

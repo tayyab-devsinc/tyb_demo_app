@@ -1,6 +1,13 @@
 <%= form_for(@plan) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control', required: true %>
-  <%= f.select :features, all_features_for_select, {include_hidden: false, selected: pre_selected_features }, multiple: true %>
-  <%= f.submit labels[:button], class: 'btn btn-primary' %>
+  <%= f.label :monthly_fee %>
+  <%= f.text_field :monthly_fee, class: 'form-control', required: true, min: 0 %>
+
+  <%= f.fields_for(@plan_features) do |ff| %>
+    <%= ff.select :features, @all_features, {include_hidden: false, selected: pre_selected_features(@plan) }, multiple: true %>
+  <% end %>
+
+  <%#= f.select :features, Feature.all.collect { |x| [x.name, x.id] }, {include_hidden: false, selected: pre_selected_features(@plan) }, multiple: true %>
+  <%= f.submit submit_text, class: 'btn btn-primary' %>
 <% end %>

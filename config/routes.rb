@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :features
-
   resources :plans
 
   get '/home', to: 'static_pages#home'
