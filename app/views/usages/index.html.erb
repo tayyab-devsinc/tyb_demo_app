@@ -1,5 +1,5 @@
-<% provide(:title, 'Subscriptions') %>
-<h1>All Subscriptions</h1>
+<% provide(:title, 'Usages') %>
+<h1>Usages</h1>
 <table class='table'>
   <tr>
     <th>Subscription Date</th>
@@ -10,6 +10,8 @@
     <th>Actions</th>
   </tr>
   <tbody class='tbody'>
-  <%= render @subscriptions %>
+  <% @subscriptions.each { |subscription| %>
+  <%=  render 'subscription', subscription: subscription  %>
+  <% } %>
   </tbody>
 </table>
