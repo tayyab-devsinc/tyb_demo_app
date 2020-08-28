@@ -1,17 +1,23 @@
 <% provide(:title, 'Usages') %>
 <h1>Usages</h1>
+<% if current_user.admin? %>
+  <div class='col-md-3'>
+    <%= button_to 'Add Usage', add_usages_path, method: :get, class: 'btn btn-primary' %>
+    <br>
+  </div>
+<% end %>
 <table class='table'>
   <tr>
-    <th>Subscription Date</th>
     <th>User</th>
     <th>Plan</th>
-    <th>Active</th>
-    <th>Billing Day</th>
+    <th>Feature</th>
+    <th>Features Limit</th>
+    <th>Features Used</th>
     <th>Actions</th>
   </tr>
   <tbody class='tbody'>
-  <% @subscriptions.each { |subscription| %>
-  <%=  render 'subscription', subscription: subscription  %>
+  <% @usages.each { |usage| %>
+  <%=  render 'usage', usage: usage  %>
   <% } %>
   </tbody>
 </table>

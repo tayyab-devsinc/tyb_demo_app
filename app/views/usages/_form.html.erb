@@ -1,0 +1,7 @@
+<%= form_for(@usage) do |f| %>
+  <%= f.label :feature %>
+  <%= f.select :feature, @subscription.plan.features.map { |x| [x.name, x.id] }, {:include_hidden => false}, class: 'form-control' %>
+  <%= f.label :feature_count %>
+  <%= f.number_field :feature_count, class: 'form-control', required: true, min: 0 %>
+  <%= f.submit labels[:button], class: 'btn btn-primary' %>
+<% end %>
