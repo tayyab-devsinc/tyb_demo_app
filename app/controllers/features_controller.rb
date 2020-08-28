@@ -2,7 +2,7 @@ class FeaturesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, except: [:index]
   before_action :initialize_feature, only: [:new, :create]
-  before_action :set_feature, only: [:edit,:update]
+  before_action :set_feature, only: [:edit, :update, :destroy]
   before_action :set_features, only: [:index]
 
   def create
@@ -26,7 +26,7 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    Feature.find(params[:id]).destroy
+    @feature.destroy
     flash[:success] = 'Feature deleted'
     redirect_to features_url
   end

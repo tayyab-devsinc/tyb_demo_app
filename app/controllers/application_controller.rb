@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile_photo])
   end
 
-  private
-
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end

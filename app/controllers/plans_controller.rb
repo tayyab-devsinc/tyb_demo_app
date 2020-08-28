@@ -3,19 +3,19 @@ class PlansController < ApplicationController
   before_action :admin_user, except: [:index]
   before_action :initiate_plan, only: [:new, :create]
   before_action :set_all_features, only: [:new, :create]
-  before_action :set_plan, only: [:edit, :update]
+  before_action :set_plan, only: [:edit, :update, :destroy]
   before_action :set_plans, only: [:index]
 
   def create
-    print("\n\n IN CREATE : #{plan_params} \n\n")
-    # @plan.attributes = plan_params
-    # if @plan.save
-    #   flash[:success] = 'Feature Successfully Added'
-    #   redirect_to plans_url
-    # else
-    #   flash[:danger] = 'Error occurred, Try Again'
-    #   render 'new'
-    # end
+    # print("\n\n IN CREATE : #{plan_params} \n\n")
+    @plan.attributes = plan_params
+    if @plan.save
+      flash[:success] = 'Feature Successfully Added'
+      redirect_to plans_url
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+      render 'new'
+    end
   end
 
   def update
@@ -31,7 +31,7 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    Plan.find(params[:id]).destroy
+    @plan.destroy
     flash[:success] = 'Plan deleted'
     redirect_to plans_url
   end
@@ -40,12 +40,11 @@ class PlansController < ApplicationController
 
   def plan_params
     print("\nFROM FORM : #{params}\n\n")
-    params.require(:plan).permit(:name, :monthly_fee, feature: [])
+    params.require(:plan).permit(:name, :monthly_fee, features: [])
   end
 
   def initiate_plan
     @plan = Plan.new
-    @plan_features = @plan.features.build
   end
 
   def set_plan
