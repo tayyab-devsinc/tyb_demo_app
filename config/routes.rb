@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :subscriptions do
     post :subscribe
     delete :unsubscribe
+    post :charge
   end
 
   resources :transactions

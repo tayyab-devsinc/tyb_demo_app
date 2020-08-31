@@ -54,6 +54,26 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def charge
+    subscription = Subscription.find(params[:subscription_id])
+    if subscription.save
+      t = Transaction.new
+      t.subscription_id = subscription.id
+      t.user_id = subscription.user_id
+      t.amount = subscription.plan.monthly_fee
+      if t.save
+        flash[:success] = 'Subscribed Successfully'
+        redirect_to plans_url
+      else
+        flash[:danger] = 'Error occurred, Try Again'
+        render plans_url
+      end
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+      render plans_url
+    end
+  end
+
   def unsubscribe
     subscription = Subscription.find_by(user_id: current_user.id, plan_id: params[:subscription_id])
     if subscription.destroy

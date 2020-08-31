@@ -7,5 +7,7 @@
   <td>
     <%= link_to 'Activation', subscription, method: :put %>
     <%= link_to 'Cancel', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+    |
+    <%= link_to 'Charge', subscription_charge_path(subscription), method: :post %>
   </td>
 </tr>
