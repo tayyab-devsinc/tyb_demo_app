@@ -3,7 +3,5 @@
   <td><%= subscription.user.name %></td>
   <td><%= link_to subscription.plan.name, subscription.plan %></td>
   <td><%= subscription.billing_day %></td>
-  <td>
-    <%= link_to 'Select', usage_select_usage_path(subscription) %>
-  </td>
+  <td><%= link_to 'Select', usage_select_usage_path(subscription) %></td>
 </tr>

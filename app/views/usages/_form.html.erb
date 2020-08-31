@@ -1,6 +1,15 @@
 <%= form_for(@usage) do |f| %>
+  <%#= f.hidden_field :subscription_id, class: 'form-control', required: true, min: 0, value: @subscription.id %>
+  <%= f.label :user %>
+  <%= f.text_field :user, class: 'form-control', disabled: true, value: @subscription.user.name %>
+  <%= f.label :plan %>
+  <%= f.text_field :plan, class: 'form-control', disabled: true, value: @subscription.plan.name %>
   <%= f.label :feature %>
-  <%= f.select :feature, @subscription.plan.features.map { |x| [x.name, x.id] }, {:include_hidden => false}, class: 'form-control' %>
+  <% if @usage.feature.nil? %>
+    <%= f.select :feature, @subscription_features, {:include_hidden => false}, class: 'form-control' %>
+  <% else %>
+    <%= f.text_field :feature, class: 'form-control', disabled: true, value: @usage.feature.name %>
+  <% end %>
   <%= f.label :feature_count %>
   <%= f.number_field :feature_count, class: 'form-control', required: true, min: 0 %>
   <%= f.submit labels[:button], class: 'btn btn-primary' %>

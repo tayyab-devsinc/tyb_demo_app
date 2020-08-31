@@ -4,4 +4,5 @@
   <td><%= usage.feature.name %></td>
   <td><%= usage.subscription.plan.features.include?(usage.feature) ? usage.feature.max_unit_limit : '' %></td>
   <td><%= usage.feature_count %></td>
+  <td><%= link_to 'Add More', edit_usage_path(usage) %></td>
 </tr>

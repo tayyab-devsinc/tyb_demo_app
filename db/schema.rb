@@ -66,10 +66,11 @@ ActiveRecord::Schema.define(version: 20200826142551) do
   create_table "usages", force: :cascade do |t|
     t.bigint "subscription_id", null: false
     t.bigint "feature_id", null: false
-    t.integer "feature_count", null: false
+    t.integer "feature_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_id"], name: "index_usages_on_feature_id"
+    t.index ["subscription_id", "feature_id"], name: "index_usages_on_subscription_id_and_feature_id", unique: true
     t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end
 
