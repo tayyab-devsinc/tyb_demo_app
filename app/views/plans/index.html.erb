@@ -1,0 +1,22 @@
+<% provide(:title, 'All users') %>
+<h1>All Plans</h1>
+<% if current_user.admin? %>
+  <div class='col-md-3'>
+    <%= button_to 'Add New Plan', new_plan_path, method: :get, class: 'btn btn-primary' %>
+    <br>
+  </div>
+<% end %>
+<table class='table'>
+  <tr>
+    <th>Name</th>
+    <th>Fee</th>
+    <th>Features</th>
+    <% if current_user.admin? %>
+      <th>Actions</th>
+    <% end %>
+  </tr>
+  <tbody class='tbody'>
+  <%= render @plans %>
+  </tbody>
+</table>
+<%= will_paginate %>

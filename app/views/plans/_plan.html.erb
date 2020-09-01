@@ -1,0 +1,11 @@
+<tr>
+  <td><%= plan.name %></td>
+  <td><%= plan.monthly_fee %></td>
+  <td><%= plan_features plan%></td>
+  <% if current_user.admin? %>
+    <td>
+      <%= link_to 'Edit', edit_plan_path(plan) %>
+      <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'} %>
+    </td>
+  <% end %>
+</tr>
