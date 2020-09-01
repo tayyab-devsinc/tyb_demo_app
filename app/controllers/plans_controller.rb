@@ -5,9 +5,9 @@ class PlansController < ApplicationController
   before_action :set_all_features, only: [:new, :edit]
   before_action :set_plan, only: [:edit, :update, :destroy]
   before_action :set_plans, only: [:index]
-  before_action :set_plan_params, only: [:create, :update]
 
   def create
+    @plan.assign_attributes(plan_params)
     if @plan.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to plans_url
@@ -18,7 +18,7 @@ class PlansController < ApplicationController
   end
 
   def update
-    if @plan.save
+    if @plan.update(plan_params)
       flash[:success] = 'Successfully Updated'
       redirect_to plans_url
     else
@@ -27,8 +27,11 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    @plan.destroy
-    flash[:success] = 'Plan deleted'
+    if @plan.destroy
+      flash[:success] = 'Plan deleted'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
     redirect_to plans_url
   end
 
@@ -47,15 +50,10 @@ class PlansController < ApplicationController
   end
 
   def set_plans
-    @plans = Plan.preload(:features).paginate(page: params[:page], per_page: 10)
-  end
-
-  def set_plan_params
-    @plan.attributes = plan_params
+    @plans = Plan.includes(:features).paginate(page: params[:page], per_page: 10)
   end
 
   def set_all_features
     @all_features = Feature.all.collect { |x| [x.name, x.id] }
   end
-
 end

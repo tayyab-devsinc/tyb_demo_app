@@ -6,7 +6,7 @@ class FeaturesController < ApplicationController
   before_action :set_features, only: [:index]
 
   def create
-    @feature.attributes = feature_params
+    @feature.assign_attributes(feature_params)
     if @feature.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to features_url
@@ -26,8 +26,11 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    @feature.destroy
-    flash[:success] = 'Feature deleted'
+    if @feature.destroy
+      flash[:success] = 'Feature deleted'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
     redirect_to features_url
   end
 
@@ -42,7 +45,7 @@ class FeaturesController < ApplicationController
   end
 
   def set_feature
-    @feature = Feature.find(params[:id])
+    @feature = Feature.find_by(id: params[:id])
   end
 
   def set_features
