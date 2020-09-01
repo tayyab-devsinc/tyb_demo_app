@@ -11,7 +11,7 @@
     <% if current_user.subscriptions?(plan) %>
       <td><%= link_to 'UnSubscribe', subscription_unsubscribe_path(plan), method: :delete, data: {confirm: 'Are you sure?'} %></td>
     <% else %>
-      <td><%= link_to 'Subscribe', subscription_subscribe_path(plan), method: :post %></td>
+      <td><%= link_to 'Subscribe', subscription_subscribe_path(plan), method: :post, plan_id: plan.id  %></td>
     <% end %>
   <% end %>
 </tr>

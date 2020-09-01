@@ -16,4 +16,8 @@ class User < ApplicationRecord
     Subscription.find_by(user_id: id, plan_id: plan.id)
   end
 
+  def hi
+    print("HIHIHIHI")
+  end
+
 end
