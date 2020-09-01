@@ -1,27 +1,13 @@
 class PlansController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index, :show]
-
-  def index
-    @plans = Plan.paginate(page: params[:page], per_page: 10)
-  end
-
-  def new
-    @plan = Plan.new
-  end
-
-  def show
-    @plan = Plan.find(params[:id])
-  end
+  before_action :admin_user, except: [:index]
+  before_action :initiate_plan, only: [:new, :create]
+  before_action :set_all_features, only: [:new, :edit]
+  before_action :set_plan, only: [:edit, :update, :destroy]
+  before_action :set_plans, only: [:index]
 
   def create
-    @plan = Plan.new
-    @plan.name = plan_params[:name]
-    plan_params[:features]&.each do |fid|
-      fr = Feature.find(fid)
-      @plan.features << fr
-    end
+    @plan.assign_attributes(plan_params)
     if @plan.save
       flash[:success] = 'Feature Successfully Added'
       redirect_to plans_url
@@ -31,19 +17,8 @@ class PlansController < ApplicationController
     end
   end
 
-  def edit
-    @plan = Plan.find(params[:id])
-  end
-
   def update
-    @plan = Plan.find(params[:id])
-    @plan.name = plan_params[:name]
-    @plan.features.clear
-    plan_params[:features]&.each do |fid|
-      fr = Feature.find(fid)
-      @plan.features << fr
-    end
-    if @plan.save
+    if @plan.update(plan_params)
       flash[:success] = 'Successfully Updated'
       redirect_to plans_url
     else
@@ -52,18 +27,33 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    Plan.find(params[:id]).destroy
-    flash[:success] = 'Plan deleted'
+    if @plan.destroy
+      flash[:success] = 'Plan deleted'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
     redirect_to plans_url
-  end
-
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
   end
 
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :monthly_fee, features: [])
+    params.require(:plan).permit(:name, :monthly_fee, feature_ids: [])
+  end
+
+  def initiate_plan
+    @plan = Plan.new
+  end
+
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
+
+  def set_plans
+    @plans = Plan.includes(:features).paginate(page: params[:page], per_page: 10)
+  end
+
+  def set_all_features
+    @all_features = Feature.all.collect { |x| [x.name, x.id] }
   end
 end

@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users
 
   resources :features
   resources :plans
-  devise_for :users
+  resources :transactions
 
   resources :subscriptions do
     post :subscribe
     delete :unsubscribe
   end
-
-  resources :transactions
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'

@@ -41,9 +41,9 @@ gem 'rmagick'
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
-gem 'will_paginate'
-
 gem 'whenever', require: false
+gem 'parsley-rails'
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
