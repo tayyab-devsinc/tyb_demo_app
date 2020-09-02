@@ -41,6 +41,7 @@ gem 'rmagick'
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
+gem 'whenever', require: false
 gem 'will_paginate'
 
 group :development, :test do

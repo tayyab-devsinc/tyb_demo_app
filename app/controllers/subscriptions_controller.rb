@@ -40,7 +40,7 @@ class SubscriptionsController < ApplicationController
         t.user_id = subscription.user_id
         t.amount = subscription.plan.monthly_fee
         if t.save
-          InvoiceMailer.invoice_email(current_user,t).deliver_now
+          InvoiceMailer.invoice_email(current_user, t).deliver_now
           flash[:success] = 'Subscribed Successfully'
           redirect_to plans_url
         else
@@ -60,17 +60,17 @@ class SubscriptionsController < ApplicationController
       t = Transaction.new
       t.subscription_id = subscription.id
       t.user_id = subscription.user_id
-      t.amount = subscription.plan.monthly_fee
+      t.amount = Usage.calculate_fee(subscription)
       if t.save
         flash[:success] = 'Subscribed Successfully'
-        redirect_to plans_url
+        redirect_to subscriptions_url
       else
         flash[:danger] = 'Error occurred, Try Again'
-        render plans_url
+        render subscriptions_url
       end
     else
       flash[:danger] = 'Error occurred, Try Again'
-      render plans_url
+      render subscriptions_url
     end
   end
 
