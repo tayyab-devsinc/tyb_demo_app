@@ -15,5 +15,4 @@ class User < ApplicationRecord
   def subscriptions?(plan)
     Subscription.find_by(user_id: id, plan_id: plan.id)
   end
-
 end
