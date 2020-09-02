@@ -1,7 +1,6 @@
 class SubscriptionsController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :normal_user, only: [:subscribe, :unsubscribe]
+  before_action :set_subscription, only: [:update, :destroy]
 
   def index
     @subscriptions = if current_user.admin?
@@ -12,15 +11,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    Subscription.find(params[:id]).destroy
-    flash[:success] = 'Subscription Canceled'
+    if @subscription.destroy
+      flash[:success] = 'Subscription Canceled'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
     redirect_to subscriptions_url
   end
 
   def update
-    @subscription = Subscription.find(params[:id])
-    @subscription.active = !@subscription.active
-    if @subscription.save
+    if @subscription.update_attributes(active: !@subscription.active)
       flash[:success] = 'Successfully Updated'
     else
       flash[:danger] = 'Error occurred, Try Again'
@@ -29,25 +29,17 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscribe
-    ActiveRecord::Base.transaction do
-      subscription = Subscription.new(subscription_params)
-      if subscription.save
-        t = Transaction.new
-        t.subscription_id = subscription.id
-        t.user_id = subscription.user_id
-        t.amount = subscription.plan.monthly_fee
-        if t.save
-          flash[:success] = 'Subscribed Successfully'
-          redirect_to plans_url
-        else
-          flash[:danger] = 'Error occurred, Try Again'
-          render plans_url
-        end
+    subscription = Subscription.new(subscription_params)
+    if subscription.save
+      if Transaction.subscription_transaction(subscription)
+        flash[:success] = 'Subscribed Successfully'
       else
         flash[:danger] = 'Error occurred, Try Again'
-        render plans_url
       end
+    else
+      flash[:danger] = 'Error occurred, Try Again'
     end
+    redirect_to plans_url
   end
 
   def unsubscribe
@@ -61,17 +53,16 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def normal_user
-    redirect_to(root_url) if current_user.admin?
-  end
-
   private
+
+  def set_subscription
+    @subscription = Subscription.find_by(id: params[:id])
+  end
 
   def subscription_params
     { plan_id: params[:subscription_id],
-     user_id: current_user.id,
-     subscription_date: Date.today,
-     billing_day: Date.today.day > 28 ? 28 : Date.today.day }
+      user_id: current_user.id,
+      subscription_date: Date.today,
+      billing_day: Date.today.day > 28 ? 28 : Date.today.day }
   end
-
 end
