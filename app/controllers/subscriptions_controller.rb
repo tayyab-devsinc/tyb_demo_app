@@ -30,12 +30,8 @@ class SubscriptionsController < ApplicationController
 
   def subscribe
     subscription = Subscription.new(subscription_params)
-    if subscription.save
-      if Transaction.subscription_transaction(subscription)
-        flash[:success] = 'Subscribed Successfully'
-      else
-        flash[:danger] = 'Error occurred, Try Again'
-      end
+    if subscription.save && Transaction.subscription_transaction(subscription)
+      flash[:success] = 'Subscribed Successfully'
     else
       flash[:danger] = 'Error occurred, Try Again'
     end
@@ -60,9 +56,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_params
-    { plan_id: params[:subscription_id],
-      user_id: current_user.id,
-      subscription_date: Date.today,
-      billing_day: Date.today.day > 28 ? 28 : Date.today.day }
+    {plan_id: params[:subscription_id],
+     user_id: current_user.id,
+     subscription_date: Date.today,
+     billing_day: Date.today.day > 28 ? 28 : Date.today.day}
   end
 end
