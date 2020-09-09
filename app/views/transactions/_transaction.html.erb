@@ -1,16 +1,14 @@
 <tr>
-  <td><%= transaction&.created_at&.strftime('%F') %></td>
+  <td><%= transaction.created_at.strftime('%F') %></td>
   <% if transaction&.user %>
-    <td><%= transaction&.user&.name %></td>
+    <td><%= transaction.user.name %></td>
   <% else %>
     <td>Not Found</td>
   <% end %>
   <% if transaction&.subscription %>
-    <td><%= transaction&.subscription&.plan.name %></td>
-    <td><%= transaction&.subscription&.active %></td>
+    <td><%= transaction.subscription.plan.name %></td>
   <% else %>
     <td>Deleted</td>
-    <td>false</td>
   <% end %>
-  <td><%= transaction&.amount %></td>
+  <td><%= transaction.amount %></td>
 </tr>
