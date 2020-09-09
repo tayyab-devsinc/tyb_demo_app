@@ -5,7 +5,6 @@
   <td><%= subscription.active %></td>
   <td><%= subscription.billing_day %></td>
   <td>
-    <%= link_to 'Activation', subscription, method: :put %>
-    <%= link_to 'Cancel', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+    <%= link_to 'Deactivate', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
   </td>
 </tr>

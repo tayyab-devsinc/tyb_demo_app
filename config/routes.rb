@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :features
-  resources :plans
   resources :transactions
+  resources :subscriptions
 
-  resources :subscriptions do
+  resources :plans do
     post :subscribe
     delete :unsubscribe
   end
