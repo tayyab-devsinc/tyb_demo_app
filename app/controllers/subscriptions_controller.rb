@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
     @subscriptions = if current_user.admin?
                        Subscription.includes(:plan).paginate(page: params[:page], per_page: 10)
                      else
-                       current_user.subscriptions.includes(:features).paginate(page: params[:page], per_page: 10)
+                       current_user.subscriptions.includes(:plan).paginate(page: params[:page], per_page: 10)
                      end
   end
 
