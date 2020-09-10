@@ -3,9 +3,8 @@ class PlansController < ApplicationController
   before_action :admin_user, except: [:index, :subscribe]
   before_action :initiate_plan, only: [:new, :create]
   before_action :set_all_features, only: [:new, :edit]
-  before_action :set_plan, only: [:show,:edit, :update, :destroy]
+  before_action :set_plan, only: [:show,:edit, :update, :destroy, :subscribe]
   before_action :set_plans, only: [:index]
-  before_action :set_plan, only: [:subscribe]
 
   def create
     @plan.assign_attributes(plan_params)
