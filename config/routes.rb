@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   resources :plans do
     post :subscribe
-    delete :unsubscribe
   end
 
   get '/home', to: 'static_pages#home'

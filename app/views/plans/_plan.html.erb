@@ -2,14 +2,14 @@
   <td><%= link_to plan.name, plan %></td>
   <td><%= plan.monthly_fee %></td>
   <td><%= plan_features(plan) %></td>
-  <% if current_user.admin? %>
+  <% if current_user&.admin? %>
     <td>
       <%= link_to 'Edit', edit_plan_path(plan) %>
       <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'} %>
     </td>
   <% else %>
-    <% if current_user.subscribed?(plan) %>
-      <td><%= link_to 'UnSubscribe', plan_unsubscribe_path(plan), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    <% if current_user&.subscribed?(plan) %>
+      <td>Already Subscribed</td>
     <% else %>
       <td><%= link_to 'Subscribe', plan_subscribe_path(plan), method: :post %></td>
     <% end %>

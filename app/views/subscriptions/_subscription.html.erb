@@ -1,9 +1,9 @@
 <tr>
-  <td><%= subscription.subscription_date.strftime('%F') %></td>
+  <td><%= subscription.created_at.strftime('%F') %></td>
   <td><%= subscription.user.name %></td>
   <td><%= link_to subscription.plan.name, subscription.plan %></td>
   <td><%= subscription.billing_day %></td>
   <td>
-    <%= link_to 'Deactivate', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+    <%= link_to 'UnSubscribe', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
   </td>
 </tr>

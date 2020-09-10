@@ -13,6 +13,6 @@ class User < ApplicationRecord
   validates_processing_of :profile_photo
 
   def subscribed?(plan)
-    subscriptions.find_by(plan_id: plan.id)
+    subscriptions.exists?(plan_id: plan.id)
   end
 end
