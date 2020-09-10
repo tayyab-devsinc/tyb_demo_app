@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index, :subscribe]
+  before_action :admin_user, except: [:index, :subscribe, :show]
   before_action :initiate_plan, only: [:new, :create]
   before_action :set_all_features, only: [:new, :edit]
   before_action :set_plan, only: [:show,:edit, :update, :destroy, :subscribe]
@@ -55,7 +55,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = Plan.find(params[:id] || params[:plan_id])
+    @plan = Plan.find_by(id: params[:id] || params[:plan_id])
   end
 
   def set_plans
