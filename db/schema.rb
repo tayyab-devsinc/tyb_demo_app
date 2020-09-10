@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200824113724) do
+ActiveRecord::Schema.define(version: 20200825153746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,28 @@ ActiveRecord::Schema.define(version: 20200824113724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_plans_on_name"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "plan_id"
+    t.integer "billing_day", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
+    t.index ["user_id", "plan_id"], name: "index_subscriptions_on_user_id_and_plan_id", unique: true
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "subscription_id"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
+    t.index ["user_id", "subscription_id"], name: "index_transactions_on_user_id_and_subscription_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

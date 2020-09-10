@@ -1,9 +1,9 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index]
+  before_action :admin_user, except: [:index, :subscribe, :show]
   before_action :initiate_plan, only: [:new, :create]
   before_action :set_all_features, only: [:new, :edit]
-  before_action :set_plan, only: [:edit, :update, :destroy]
+  before_action :set_plan, only: [:show,:edit, :update, :destroy, :subscribe]
   before_action :set_plans, only: [:index]
 
   def create
@@ -35,6 +35,15 @@ class PlansController < ApplicationController
     redirect_to plans_url
   end
 
+  def subscribe
+    if current_user.plans << @plan
+      flash[:success] = 'Subscribed Successfully'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
+    redirect_to plans_url
+  end
+
   private
 
   def plan_params
@@ -46,7 +55,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = Plan.find(params[:id])
+    @plan = Plan.find_by_id(params[:id] || params[:plan_id])
   end
 
   def set_plans

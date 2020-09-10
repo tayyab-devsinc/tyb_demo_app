@@ -1,0 +1,14 @@
+<tr>
+  <td><%= transaction.created_at.strftime('%F') %></td>
+  <% if transaction&.user %>
+    <td><%= transaction.user.name %></td>
+  <% else %>
+    <td>Not Found</td>
+  <% end %>
+  <% if transaction&.subscription %>
+    <td><%= transaction.subscription.plan.name %></td>
+  <% else %>
+    <td>Deleted</td>
+  <% end %>
+  <td><%= transaction.amount %></td>
+</tr>

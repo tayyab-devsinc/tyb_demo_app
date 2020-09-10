@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :subscriptions, dependent: :destroy
+  has_many :plans, through: :subscriptions
+  has_many :transactions, through: :subscriptions
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -9,4 +12,7 @@ class User < ApplicationRecord
   validates_integrity_of :profile_photo
   validates_processing_of :profile_photo
 
+  def subscribed?(plan_id)
+    subscriptions.exists?(plan_id: plan_id)
+  end
 end
