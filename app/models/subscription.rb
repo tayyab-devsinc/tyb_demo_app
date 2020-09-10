@@ -1,10 +1,9 @@
 class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :plan
-
   has_many :transactions
 
-  validates :billing_day, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 28 }
+  validates :billing_day, presence: true, inclusion: 1..28
 
   before_validation :set_billing_day
   after_save :subscription_transaction

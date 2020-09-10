@@ -8,7 +8,7 @@
       <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'} %>
     </td>
   <% else %>
-    <% if current_user&.subscribed?(plan) %>
+    <% if current_user&.subscribed?(plan.id) %>
       <td>Already Subscribed</td>
     <% else %>
       <td><%= link_to 'Subscribe', plan_subscribe_path(plan), method: :post %></td>

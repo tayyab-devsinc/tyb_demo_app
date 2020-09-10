@@ -5,7 +5,7 @@ class PlansController < ApplicationController
   before_action :set_all_features, only: [:new, :edit]
   before_action :set_plan, only: [:show,:edit, :update, :destroy]
   before_action :set_plans, only: [:index]
-  before_action :set_subscription_plan, only: [:subscribe]
+  before_action :set_plan, only: [:subscribe]
 
   def create
     @plan.assign_attributes(plan_params)
@@ -56,7 +56,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = Plan.find(params[:id])
+    @plan = Plan.find(params[:id] || params[:plan_id])
   end
 
   def set_plans
@@ -65,9 +65,5 @@ class PlansController < ApplicationController
 
   def set_all_features
     @all_features = Feature.all.collect { |x| [x.name, x.id] }
-  end
-
-  def set_subscription_plan
-    @plan = Plan.find(params[:plan_id])
   end
 end
