@@ -55,7 +55,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = Plan.find_by(id: params[:id] || params[:plan_id])
+    @plan = Plan.find_by_id(params[:id] || params[:plan_id])
   end
 
   def set_plans
