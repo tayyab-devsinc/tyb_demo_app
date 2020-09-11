@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_subscription, only: [:destroy]
+  before_action :set_subscription, only: [:destroy, :charge]
 
   def index
     @subscriptions = if current_user.admin?
@@ -19,30 +19,13 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_url
   end
 
-
   def charge
-    subscription = Subscription.find(params[:subscription_id])
-    if subscription.save
-      t = Transaction.new
-      t.subscription_id = subscription.id
-      t.user_id = subscription.user_id
-      t.amount = Usage.calculate_fee(subscription)
-      if t.save
-        flash[:success] = 'Subscribed Successfully'
-        redirect_to subscriptions_url
-      else
-        flash[:danger] = 'Error occurred, Try Again'
-        render subscriptions_url
-      end
-    else
-      flash[:danger] = 'Error occurred, Try Again'
-      render subscriptions_url
-    end
+    Transaction.make_transaction(@subscription)
   end
 
   private
 
   def set_subscription
-    @subscription = Subscription.find_by(id: params[:id])
+    @subscription = Subscription.find_by_id(params[:id] || params[:subscription_id])
   end
 end

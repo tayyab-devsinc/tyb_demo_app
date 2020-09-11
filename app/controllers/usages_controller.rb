@@ -11,9 +11,7 @@ class UsagesController < ApplicationController
   end
 
   def create
-    @usage.feature = Feature.find(usage_params[:feature])
-    @usage.feature_count = usage_params[:feature_count]
-    @usage.subscription = Subscription.find(usage_params[:subscription_id])
+    @usage.assign_attributes(usage_params)
     if @usage.save
       flash[:success] = 'Usage Successfully Added'
     else
@@ -23,9 +21,7 @@ class UsagesController < ApplicationController
   end
 
   def update
-    print("\n\n #{usage_params}\n\n")
-    @usage.feature_count = usage_params[:feature_count]
-    if @usage.save
+    if @usage.update(usage_params)
       flash[:success] = 'Usage Successfully Added'
     else
       flash[:danger] = 'Error occurred, Try Again'
@@ -36,7 +32,7 @@ class UsagesController < ApplicationController
   private
 
   def usage_params
-    params.require(:usage).permit(:feature, :feature_count, :subscription_id)
+    params.require(:usage).permit(:feature_id, :feature_count, :subscription_id)
   end
 
   def initialize_usage
@@ -44,11 +40,11 @@ class UsagesController < ApplicationController
   end
 
   def set_usage
-    @usage = Usage.preload(:subscription, :feature).find(params[:id])
+    @usage = Usage.includes(:subscription, :feature).find(params[:id])
   end
 
   def set_usages
-    @usages = Usage.preload(:subscription, :feature).paginate(page: params[:page], per_page: 10)
+    @usages = Usage.includes(:subscription, :feature).paginate(page: params[:page], per_page: 10)
   end
 
   def set_subscription
@@ -60,7 +56,7 @@ class UsagesController < ApplicationController
   end
 
   def set_subscriptions
-    @subscriptions = Subscription.preload(:plan, plan: :features).paginate(page: params[:page], per_page: 10)
+    @subscriptions = Subscription.includes(:plan, plan: :features).paginate(page: params[:page], per_page: 10)
   end
 
   def subscriptions_features
