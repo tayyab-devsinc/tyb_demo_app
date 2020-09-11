@@ -20,7 +20,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def charge
-    Transaction.make_transaction(@subscription)
+    if @subscription.charge_fee
+      flash[:success] = 'Fee Charged'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
+    redirect_to subscriptions_url
   end
 
   private

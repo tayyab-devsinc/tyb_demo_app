@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :transactions
   resources :subscriptions do
     post :charge
+    resources :usages, only: :new
   end
 
   resources :plans do
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
 
   resources :usages do
     get :add, on: :collection
-    get :select_usage
   end
 
   get '/home', to: 'static_pages#home'

@@ -12,5 +12,5 @@
   <% end %>
   <%= f.label :feature_count %>
   <%= f.number_field :feature_count, class: 'form-control', required: true, min: 0 %>
-  <%= f.submit labels[:button], class: 'btn btn-primary' %>
+  <%= f.submit locals[:submit_text], class: 'btn btn-primary' %>
 <% end %>

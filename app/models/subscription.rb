@@ -9,6 +9,10 @@ class Subscription < ApplicationRecord
   before_validation :set_billing_day
   after_save :subscription_transaction
 
+  def charge_fee
+    subscription_transaction
+  end
+
   private
 
   def set_billing_day
@@ -16,6 +20,16 @@ class Subscription < ApplicationRecord
   end
 
   def subscription_transaction
-    transactions.create(user_id: user_id, amount: plan.monthly_fee)
+    transactions.create(user_id: user_id, amount: monthly_fee_calculation)
+  end
+
+  def monthly_fee_calculation
+    fee = plan.monthly_fee
+    usages.each do |u|
+      if u.feature_count > u.feature.max_unit_limit
+        fee += u.feature.unit_price * (u.feature_count - u.feature.max_unit_limit)
+      end
+    end
+    fee
   end
 end

@@ -2,13 +2,9 @@ class UsagesController < ApplicationController
   before_action :set_usages, only: [:index]
   before_action :set_usage, only: [:edit, :update]
   before_action :initialize_usage, only: [:new, :create, :select_usage]
-  before_action :set_subscriptions, only: [:add]
-  before_action :set_subscription, only: [:select_usage, :edit]
-  before_action :subscriptions_features, only: [:select_usage, :edit]
-
-  def select_usage
-    render 'new'
-  end
+  before_action :set_subscriptions, only: [:add, :show]
+  before_action :set_subscription, only: [:new, :edit]
+  before_action :subscriptions_features, only: [:new, :edit]
 
   def create
     @usage.assign_attributes(usage_params)
@@ -48,11 +44,7 @@ class UsagesController < ApplicationController
   end
 
   def set_subscription
-    @subscription = if params[:usage_id].nil?
-                      @usage.subscription
-                    else
-                      Subscription.find(params[:usage_id])
-                    end
+    @subscription = @usage.subscription || Subscription.find_by_id(params[:id] || params[:subscription_id])
   end
 
   def set_subscriptions
