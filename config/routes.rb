@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
-
-  resources :features
-  resources :plans
   devise_for :users
 
+  resources :features
+  resources :transactions
   resources :subscriptions do
-    post :subscribe
-    delete :unsubscribe
     post :charge
   end
 
-  resources :transactions
+  resources :plans do
+    post :subscribe
+  end
+
   resources :usages do
     get :add, on: :collection
     get :select_usage

@@ -16,14 +16,13 @@ ActiveRecord::Schema.define(version: 20200826142551) do
   enable_extension "plpgsql"
 
   create_table "features", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.float "unit_price"
-    t.integer "max_unit_limit"
+    t.string "name", null: false
+    t.string "code", null: false
+    t.float "unit_price", default: 0.0, null: false
+    t.integer "max_unit_limit", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_features_on_code"
-    t.index ["name"], name: "index_features_on_name"
   end
 
   create_table "features_plans", id: false, force: :cascade do |t|
@@ -33,7 +32,8 @@ ActiveRecord::Schema.define(version: 20200826142551) do
   end
 
   create_table "plans", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.float "monthly_fee", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_plans_on_name"
@@ -42,9 +42,7 @@ ActiveRecord::Schema.define(version: 20200826142551) do
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "plan_id"
-    t.datetime "subscription_date", null: false
     t.integer "billing_day", null: false
-    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
