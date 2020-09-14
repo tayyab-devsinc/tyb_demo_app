@@ -42,6 +42,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
 gem 'parsley-rails'
+gem 'pundit'
 gem 'whenever', require: false
 gem 'will_paginate'
 

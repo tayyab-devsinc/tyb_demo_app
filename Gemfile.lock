@@ -134,6 +134,8 @@ GEM
     pg (1.2.3)
     public_suffix (4.0.5)
     puma (3.12.6)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -246,6 +248,7 @@ DEPENDENCIES
   parsley-rails
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
+  pundit
   rails (~> 5.1.7)
   rmagick
   sass-rails (~> 5.0)

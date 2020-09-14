@@ -42,10 +42,12 @@ class FeaturesController < ApplicationController
 
   def initialize_feature
     @feature = Feature.new
+    authorize @feature
   end
 
   def set_feature
     @feature = Feature.find_by(id: params[:id])
+    authorize @feature
   end
 
   def set_features
