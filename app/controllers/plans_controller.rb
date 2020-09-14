@@ -1,6 +1,5 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index, :subscribe, :show]
   before_action :initiate_plan, only: [:new, :create]
   before_action :set_all_features, only: [:new, :edit]
   before_action :set_plan, only: [:show,:edit, :update, :destroy, :subscribe]
@@ -52,10 +51,12 @@ class PlansController < ApplicationController
 
   def initiate_plan
     @plan = Plan.new
+    authorize @plan
   end
 
   def set_plan
     @plan = Plan.find_by_id(params[:id] || params[:plan_id])
+    authorize @plan
   end
 
   def set_plans

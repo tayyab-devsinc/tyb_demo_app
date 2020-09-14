@@ -1,6 +1,5 @@
 class FeaturesController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_user, except: [:index]
   before_action :initialize_feature, only: [:new, :create]
   before_action :set_feature, only: [:edit, :update, :destroy]
   before_action :set_features, only: [:index]

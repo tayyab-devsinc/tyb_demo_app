@@ -1,5 +1,6 @@
 class Feature < ApplicationRecord
   has_and_belongs_to_many :plans
+  has_many :usages, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :code, presence: true, length: { maximum: 50 }

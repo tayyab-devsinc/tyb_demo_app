@@ -6,34 +6,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
   class Scope
     attr_reader :user, :scope
 
@@ -45,5 +17,19 @@ class ApplicationPolicy
     def resolve
       scope.all
     end
+  end
+
+  private
+
+  def self.permit_admin_to(*actions)
+    actions.each do |action|
+      define_method("#{action}?") do
+        admin?
+      end
+    end
+  end
+
+  def admin?
+    @user.admin
   end
 end
