@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :transactions
   resources :subscriptions do
     post :charge
-    resources :usages, only: :new
+    resources :usages, only: [:new, :create]
   end
 
   resources :plans do

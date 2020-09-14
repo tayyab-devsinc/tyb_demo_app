@@ -5,12 +5,12 @@
   <%= f.label :plan %>
   <%= f.text_field :plan, class: 'form-control', disabled: true, value: @subscription.plan.name %>
   <%= f.label :feature %>
-  <% if @usage.feature.nil? %>
-    <%= f.select :feature_id, @subscription_features, {:include_hidden => false}, class: 'form-control' %>
+  <% unless @usage.feature %>
+    <%= f.select :feature_id, @subscription_features, {include_hidden: false}, class: 'form-control' %>
   <% else %>
     <%= f.text_field :feature_id, class: 'form-control', disabled: true, value: @usage.feature.name %>
   <% end %>
   <%= f.label :feature_count %>
   <%= f.number_field :feature_count, class: 'form-control', required: true, min: 0 %>
-  <%= f.submit locals[:submit_text], class: 'btn btn-primary' %>
+  <%= f.submit submit_text, class: 'btn btn-primary' %>
 <% end %>

@@ -36,7 +36,7 @@ class UsagesController < ApplicationController
   end
 
   def set_usage
-    @usage = Usage.includes(:subscription, :feature).find(params[:id])
+    @usage = Usage.includes(:subscription, :feature).find_by_id(params[:id])
   end
 
   def set_usages
@@ -48,7 +48,7 @@ class UsagesController < ApplicationController
   end
 
   def set_subscriptions
-    @subscriptions = Subscription.includes(:plan, plan: :features).paginate(page: params[:page], per_page: 10)
+    @subscriptions = Subscription.includes(plan: :features).paginate(page: params[:page], per_page: 10)
   end
 
   def subscriptions_features

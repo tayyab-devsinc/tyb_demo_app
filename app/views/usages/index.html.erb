@@ -2,7 +2,6 @@
 <h1>Usages</h1>
 <% if current_user.admin? %>
   <div class='col-md-3'>
-    <%#= button_to 'Add Usage', add_usages_path, method: :get, class: 'btn btn-primary' %>
     <%= button_to 'Add Usage', add_usages_path, method: :get, class: 'btn btn-primary' %>
     <br>
   </div>
@@ -17,8 +16,6 @@
     <th>Actions</th>
   </tr>
   <tbody class='tbody'>
-  <% @usages.each { |usage| %>
-  <%=  render 'usage', usage: usage  %>
-  <% } %>
+  <%= render @usages %>
   </tbody>
 </table>

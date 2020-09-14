@@ -28,6 +28,10 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_url
   end
 
+  def new_subscription_usage
+    print("\n\nHELLO, CREATE USAGE HERE\n\n")
+  end
+
   private
 
   def set_subscription
