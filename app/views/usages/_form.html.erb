@@ -1,4 +1,4 @@
-<%= form_for(@usage) do |f| %>
+<%= form_for(@usage, html: { 'data-parsley-validate': '' }) do |f| %>
   <%= f.hidden_field :subscription_id, class: 'form-control', value: @subscription.id %>
   <%= f.label :user %>
   <%= f.text_field :user, class: 'form-control', disabled: true, value: @subscription.user.name %>

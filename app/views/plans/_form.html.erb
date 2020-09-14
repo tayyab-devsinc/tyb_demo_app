@@ -1,4 +1,4 @@
-<%= form_for(@plan) do |f| %>
+<%= form_for(@plan, html: { 'data-parsley-validate': '' }) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control', required: true %>
   <%= f.label :monthly_fee %>
