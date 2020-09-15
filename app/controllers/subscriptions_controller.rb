@@ -1,8 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_subscription, except: [:index]
-  before_action :initialize_usage, only: [:new_usage]
-  before_action :set_usage, only: [:edit_usage]
 
   def index
     @subscriptions = if current_user.admin?
@@ -36,7 +34,7 @@ class SubscriptionsController < ApplicationController
     else
       flash[:danger] = 'Error occurred, Try Again'
     end
-    redirect_to usages_url
+    redirect_to subscriptions_url
   end
 
   private
@@ -47,13 +45,5 @@ class SubscriptionsController < ApplicationController
 
   def set_subscription
     @subscription = Subscription.find_by_id(params[:id] || params[:subscription_id])
-  end
-
-  def initialize_usage
-    @usage = Usage.new
-  end
-
-  def set_usage
-    @usage = Usage.first
   end
 end
