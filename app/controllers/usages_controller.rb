@@ -33,10 +33,12 @@ class UsagesController < ApplicationController
 
   def initialize_usage
     @usage = Usage.new
+    authorize @usage
   end
 
   def set_usage
     @usage = Usage.includes(:subscription, :feature).find(params[:id])
+    authorize @usage
   end
 
   def set_usages

@@ -3,11 +3,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:destroy, :charge]
 
   def index
-    @subscriptions = if current_user.admin?
-                       Subscription.includes(:plan).paginate(page: params[:page], per_page: 10)
-                     else
-                       current_user.subscriptions.includes(:plan).paginate(page: params[:page], per_page: 10)
-                     end
+    @subscriptions = policy_scope(Subscription).paginate(page: params[:page], per_page: 10)
   end
 
   def destroy
@@ -20,6 +16,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def charge
+    authorize @subscription
     if @subscription.charge_fee
       flash[:success] = 'Fee Charged'
     else

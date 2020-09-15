@@ -13,5 +13,4 @@ class PlanPolicy < ApplicationPolicy
   def subscribe?
     !admin?
   end
-
 end

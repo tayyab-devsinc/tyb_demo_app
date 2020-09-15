@@ -1,8 +1,7 @@
 <% provide(:title, 'Usages') %>
 <h1>Usages</h1>
-<% if current_user.admin? %>
+<% if policy(:usage).new? %>
   <div class='col-md-3'>
-    <%#= button_to 'Add Usage', add_usages_path, method: :get, class: 'btn btn-primary' %>
     <%= button_to 'Add Usage', add_usages_path, method: :get, class: 'btn btn-primary' %>
     <br>
   </div>
@@ -14,11 +13,13 @@
     <th>Feature</th>
     <th>Features Limit</th>
     <th>Features Used</th>
-    <th>Actions</th>
+    <% if policy(:usage).update? %>
+      <th>Actions</th>
+    <% end %>
   </tr>
   <tbody class='tbody'>
   <% @usages.each { |usage| %>
-  <%=  render 'usage', usage: usage  %>
+    <%= render 'usage', usage: usage %>
   <% } %>
   </tbody>
 </table>

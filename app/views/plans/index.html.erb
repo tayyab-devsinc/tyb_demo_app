@@ -1,6 +1,6 @@
 <% provide(:title, 'Plans') %>
 <h1>All Plans</h1>
-<% if current_user.admin? %>
+<% if policy(:plan).new? %>
   <div class='col-md-3'>
     <%= button_to 'Add New Plan', new_plan_path, method: :get, class: 'btn btn-primary' %>
     <br>
