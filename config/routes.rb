@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :subscriptions do
     post :charge
     resources :usages
-    get :all_usages, on: :collection
   end
 
   resources :plans do

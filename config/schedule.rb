@@ -14,7 +14,7 @@
 # end
 #
 every 1.day do
-  runner "Transaction.daily_transaction", output: 'log/transactions.log'
+  rake 'transaction:daily_transaction'
 end
 
 # Learn more: http://github.com/javan/whenever
