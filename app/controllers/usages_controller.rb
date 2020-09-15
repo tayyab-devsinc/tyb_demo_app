@@ -13,7 +13,7 @@ class UsagesController < ApplicationController
     else
       flash[:danger] = 'Error occurred, Try Again'
     end
-    redirect_to usages_url
+    redirect_to subscriptions_url
   end
 
   def update
@@ -22,7 +22,7 @@ class UsagesController < ApplicationController
     else
       flash[:danger] = 'Error occurred, Try Again'
     end
-    redirect_to usages_url
+    redirect_to subscriptions_url
   end
 
   private
@@ -40,11 +40,11 @@ class UsagesController < ApplicationController
   end
 
   def set_usages
-    @usages = Usage.includes(:subscription, :feature).paginate(page: params[:page], per_page: 10)
+    @usages = Usage.where(subscription_id: params[:subscription_id]).includes(:subscription, :feature).paginate(page: params[:page], per_page: 10)
   end
 
   def set_subscription
-    @subscription = @usage.subscription || Subscription.find_by_id(params[:id] || params[:subscription_id])
+    @subscription = Subscription.find_by_id(params[:subscription_id] || params[:id])
   end
 
   def set_subscriptions
@@ -52,10 +52,6 @@ class UsagesController < ApplicationController
   end
 
   def subscriptions_features
-    @subscription_features = if @subscription.nil?
-                               @usage.subscription.plan.features.map { |x| [x.name, x.id] }
-                             else
-                               @subscription.plan.features.map { |x| [x.name, x.id] }
-                             end
+    @subscription_features = @subscription.plan.features.map { |x| [x.name, x.id] }
   end
 end
