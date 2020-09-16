@@ -13,6 +13,10 @@ class Subscription < ApplicationRecord
     subscription_transaction
   end
 
+  def create_usage(usage_params)
+    usages.create(usage_params)
+  end
+
   private
 
   def set_billing_day

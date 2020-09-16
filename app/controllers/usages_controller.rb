@@ -1,14 +1,11 @@
 class UsagesController < ApplicationController
-  before_action :set_usages, only: [:index]
   before_action :set_usage, only: [:edit, :update]
-  before_action :initialize_usage, only: [:new, :create, :select_usage]
-  before_action :set_subscriptions, only: [:add, :show]
-  before_action :set_subscription, only: [:new, :edit]
-  before_action :subscriptions_features, only: [:new, :edit]
+  before_action :initialize_usage, only: [:new, :create]
+  before_action :set_subscription, only: [:new, :edit, :create, :index]
+  before_action :set_subscriptions_features, only: [:new, :edit]
 
   def create
-    @usage.assign_attributes(usage_params)
-    if @usage.save
+    if @subscription.create_usage(usage_params)
       flash[:success] = 'Usage Successfully Added'
     else
       flash[:danger] = 'Error occurred, Try Again'
@@ -18,7 +15,7 @@ class UsagesController < ApplicationController
 
   def update
     if @usage.update(usage_params)
-      flash[:success] = 'Usage Successfully Added'
+      flash[:success] = 'Usage Successfully Updated'
     else
       flash[:danger] = 'Error occurred, Try Again'
     end
@@ -28,7 +25,7 @@ class UsagesController < ApplicationController
   private
 
   def usage_params
-    params.require(:usage).permit(:feature_id, :feature_count, :subscription_id)
+    params.require(:usage).permit(:feature_id, :feature_count)
   end
 
   def initialize_usage
@@ -39,19 +36,11 @@ class UsagesController < ApplicationController
     @usage = Usage.includes(:subscription, :feature).find_by_id(params[:id])
   end
 
-  def set_usages
-    @usages = Usage.where(subscription_id: params[:subscription_id]).includes(:subscription, :feature).paginate(page: params[:page], per_page: 10)
-  end
-
   def set_subscription
-    @subscription = Subscription.find_by_id(params[:subscription_id] || params[:id])
+    @subscription = Subscription.includes(:usages).find_by_id(params[:subscription_id])
   end
 
-  def set_subscriptions
-    @subscriptions = Subscription.includes(plan: :features).paginate(page: params[:page], per_page: 10)
-  end
-
-  def subscriptions_features
+  def set_subscriptions_features
     @subscription_features = @subscription.plan.features.map { |x| [x.name, x.id] }
   end
 end
