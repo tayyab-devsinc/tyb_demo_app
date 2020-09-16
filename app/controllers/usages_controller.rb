@@ -5,7 +5,7 @@ class UsagesController < ApplicationController
   before_action :set_subscriptions_features, only: [:new, :edit]
 
   def create
-    if @subscription.create_usage(usage_params)
+    if @subscription.usages.create(usage_params)
       flash[:success] = 'Usage Successfully Added'
     else
       flash[:danger] = 'Error occurred, Try Again'
@@ -33,7 +33,7 @@ class UsagesController < ApplicationController
   end
 
   def set_usage
-    @usage = Usage.includes(:subscription, :feature).find_by_id(params[:id])
+    @usage = Usage.find_by_id(params[:id])
   end
 
   def set_subscription
