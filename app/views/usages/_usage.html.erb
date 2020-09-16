@@ -1,0 +1,10 @@
+<tr>
+  <td><%= usage.subscription.user.name %></td>
+  <td><%= link_to usage.subscription.plan.name, usage.subscription.plan %></td>
+  <td><%= usage.feature.name %></td>
+  <td><%= usage.feature.max_unit_limit %></td>
+  <td><%= usage.feature_count %></td>
+  <% if current_user.admin? %>
+    <td><%= link_to 'Add', edit_subscription_usage_path(usage.subscription, usage) %></td>
+  <% end %>
+</tr>

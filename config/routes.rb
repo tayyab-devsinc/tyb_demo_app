@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :features
   resources :transactions
-  resources :subscriptions
+
+  resources :subscriptions do
+    post :charge
+    resources :usages
+  end
 
   resources :plans do
     post :subscribe

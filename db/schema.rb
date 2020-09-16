@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200825153746) do
+ActiveRecord::Schema.define(version: 20200826142551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20200825153746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_features_on_code"
-    t.index ["name"], name: "index_features_on_name"
   end
 
   create_table "features_plans", id: false, force: :cascade do |t|
@@ -34,7 +33,7 @@ ActiveRecord::Schema.define(version: 20200825153746) do
 
   create_table "plans", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "monthly_fee", default: 0, null: false
+    t.float "monthly_fee", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_plans_on_name"
@@ -60,6 +59,17 @@ ActiveRecord::Schema.define(version: 20200825153746) do
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
     t.index ["user_id", "subscription_id"], name: "index_transactions_on_user_id_and_subscription_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
+  create_table "usages", force: :cascade do |t|
+    t.bigint "subscription_id", null: false
+    t.bigint "feature_id", null: false
+    t.integer "feature_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_usages_on_feature_id"
+    t.index ["subscription_id", "feature_id"], name: "index_usages_on_subscription_id_and_feature_id", unique: true
+    t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end
 
   create_table "users", force: :cascade do |t|

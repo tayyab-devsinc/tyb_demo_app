@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_subscription, only: [:destroy]
+  before_action :set_subscription, except: [:index]
 
   def index
     @subscriptions = if current_user.admin?
@@ -19,9 +19,31 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_url
   end
 
+  def charge
+    if @subscription.charge_fee
+      flash[:success] = 'Fee Charged'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
+    redirect_to subscriptions_url
+  end
+
+  def create_usage
+    if @subscription.usages.create(usage_params)
+      flash[:success] = 'Usage Added'
+    else
+      flash[:danger] = 'Error occurred, Try Again'
+    end
+    redirect_to subscriptions_url
+  end
+
   private
 
+  def usage_params
+    params.require(:usage).permit(:feature_id, :feature_count)
+  end
+
   def set_subscription
-    @subscription = Subscription.find_by(id: params[:id])
+    @subscription = Subscription.find_by_id(params[:id] || params[:subscription_id])
   end
 end

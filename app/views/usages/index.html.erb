@@ -1,0 +1,23 @@
+<% provide(:title, 'Usages') %>
+<h1>Usages</h1>
+<% if current_user.admin? %>
+  <div class='col-md-3'>
+    <%= button_to 'Add Usage', new_subscription_usage_path, method: :get, class: 'btn btn-primary' %>
+    <br>
+  </div>
+<% end %>
+<table class='table'>
+  <tr>
+    <th>User</th>
+    <th>Plan</th>
+    <th>Feature</th>
+    <th>Features Limit</th>
+    <th>Features Used</th>
+    <% if current_user.admin? %>
+      <th>Actions</th>
+    <% end %>
+  </tr>
+  <tbody class='tbody'>
+    <%= render @subscription.usages %>
+  </tbody>
+</table>

@@ -1,0 +1,15 @@
+<% provide(:title, 'Usage') %>
+<h1>Select Subscriptions</h1>
+<table class='table'>
+  <tr>
+    <th>Subscription Date</th>
+    <th>User</th>
+    <th>Plan</th>
+    <th>Active</th>
+    <th>Actions</th>
+  </tr>
+  <tbody class='tbody'>
+  <%= render 'usages/subscription', subscriptions: @subscriptions %>
+  </tbody>
+</table>
+<%= will_paginate @subscriptions %>
