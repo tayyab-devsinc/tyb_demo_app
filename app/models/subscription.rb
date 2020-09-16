@@ -26,9 +26,7 @@ class Subscription < ApplicationRecord
   def monthly_fee_calculation
     fee = plan.monthly_fee
     usages.greater_count_usages.each do |u|
-      if u.feature_count > u.feature.max_unit_limit
-        fee += u.feature.unit_price * (u.feature_count - u.feature.max_unit_limit)
-      end
+      fee += u.feature.unit_price * (u.feature_count - u.feature.max_unit_limit)
     end
     fee
   end
