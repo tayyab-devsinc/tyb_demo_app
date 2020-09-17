@@ -8,4 +8,6 @@ class TransactionPolicy < ApplicationPolicy
       end
     end
   end
+
+  permit_admin_to :create
 end
