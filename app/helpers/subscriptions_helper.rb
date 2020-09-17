@@ -3,7 +3,7 @@ module SubscriptionsHelper
     Date.today.day == day
   end
 
-  def transaction_present?(subscription)
-    subscription.transactions.where('created_at::date = ?', Date.today).exists?
+  def charge_able?(subscription)
+    billing_day?(subscription.billing_day) && !subscription.transaction_exists?
   end
 end
