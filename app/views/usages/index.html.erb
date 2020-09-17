@@ -18,8 +18,6 @@
     <% end %>
   </tr>
   <tbody class='tbody'>
-  <% @usages.each { |usage| %>
-    <%= render 'usage', usage: usage %>
-  <% } %>
+    <%= render @subscription.usages %>
   </tbody>
 </table>

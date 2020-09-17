@@ -3,17 +3,14 @@ Rails.application.routes.draw do
 
   resources :features
   resources :transactions
+
   resources :subscriptions do
     post :charge
-    resources :usages, only: :new
+    resources :usages
   end
 
   resources :plans do
     post :subscribe
-  end
-
-  resources :usages do
-    get :add, on: :collection
   end
 
   get '/home', to: 'static_pages#home'

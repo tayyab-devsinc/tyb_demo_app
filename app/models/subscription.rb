@@ -10,7 +10,7 @@ class Subscription < ApplicationRecord
   after_save :subscription_transaction
 
   def charge_fee
-    subscription_transaction
+    subscription_transaction if billing_day == Date.today.day
   end
 
   private
@@ -25,10 +25,8 @@ class Subscription < ApplicationRecord
 
   def monthly_fee_calculation
     fee = plan.monthly_fee
-    usages.each do |u|
-      if u.feature_count > u.feature.max_unit_limit
-        fee += u.feature.unit_price * (u.feature_count - u.feature.max_unit_limit)
-      end
+    usages.greater_count_usages.each do |u|
+      fee += u.feature.unit_price * (u.feature_count - u.feature.max_unit_limit)
     end
     fee
   end
