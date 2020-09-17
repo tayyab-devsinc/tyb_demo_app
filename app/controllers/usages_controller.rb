@@ -11,6 +11,9 @@ class UsagesController < ApplicationController
       flash[:danger] = 'Error occurred, Try Again'
     end
     redirect_to subscriptions_url
+  rescue ActiveRecord::RecordNotUnique
+    flash[:danger] = 'Usage Already Exist, Try to update'
+    redirect_to subscriptions_url
   end
 
   def update
