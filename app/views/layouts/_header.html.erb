@@ -6,7 +6,9 @@
         <ul class='nav navbar-nav'>
           <li><%= link_to 'Home', home_path %></li>
           <li><%= link_to 'Plans', plans_path %></li>
-          <li><%= link_to 'Features', features_path %></li>
+          <% if current_user.admin? %>
+            <li><%= link_to 'Features', features_path %></li>
+          <% end %>
           <li><%= link_to 'Subscriptions', subscriptions_path %></li>
           <li><%= link_to 'Transactions', transactions_path %></li>
           <li><%= link_to 'Usages', subscriptions_path %></li>
