@@ -1,15 +1,21 @@
 <% provide(:title, 'Subscriptions') %>
 <h1>All Subscriptions</h1>
-<table class='table'>
-  <tr>
-    <th>Subscription Date</th>
-    <th>User</th>
-    <th>Plan</th>
-    <th>Billing Day</th>
-    <th>Actions</th>
-  </tr>
-  <tbody class='tbody'>
+<% if policy(:subscription).charge? %>
+  <table class='table'>
+    <tr>
+      <th>Subscription Date</th>
+      <th>User</th>
+      <th>Plan</th>
+      <th>Billing Day</th>
+      <th>Actions</th>
+    </tr>
+    <tbody class='tbody'>
     <%= render @subscriptions %>
-  </tbody>
-</table>
-<%= will_paginate %>
+    </tbody>
+  </table>
+  <%= will_paginate %>
+<% else %>
+  <div class="row">
+    <%= render @subscriptions %>
+  </div>
+<% end %>

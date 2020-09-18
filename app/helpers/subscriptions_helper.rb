@@ -10,4 +10,8 @@ module SubscriptionsHelper
   def plan_class(plan_id)
     current_user&.subscribed?(plan_id) ? 'plan color-1 four columns' : 'plan color-2 four columns'
   end
+
+  def plan_features(plan)
+    plan.features.map(&:name).join(', ')
+  end
 end
