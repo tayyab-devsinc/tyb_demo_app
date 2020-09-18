@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
@@ -29,12 +30,22 @@ body {
   padding-top: 60px;
 }
 
+.main {
+  margin-left: 180px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+  width: 84%;
+}
+
 section {
   overflow: auto;
 }
 
 textarea {
   resize: vertical;
+}
+
+.btn-primary{
+  background: #4527A0;
 }
 
 .center {
@@ -87,11 +98,13 @@ p {
 }
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
+  width: 84%;
+  margin-left: 180px;
+  padding: 5px 5px 5px 5px;
+  position: fixed;
+  bottom: 0;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
-
   a {
     color: $gray;
 
@@ -113,14 +126,6 @@ footer {
       margin-left: 15px;
     }
   }
-}
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
 }
 
 input, textarea, select, .uneditable-input {
@@ -179,4 +184,59 @@ input {
 
 .parsley-required {
   color: red
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: arial
+}
+
+.wrapper {
+  position: relative
+}
+
+.sidebar {
+  position: fixed;
+  width: 180px;
+  height: 100%;
+  background: #4527A0;
+  padding: 10px 0
+}
+
+.wrapper .sidebar ul li {
+  padding: 15px;
+  font-size: 16px;
+  i{
+    &.fa{
+      padding-right: 7px;
+      font-size: 20px;
+    }
+  }
+}
+
+.wrapper .sidebar ul li a {
+  color: #bdb8d7;
+  display: block;
+  padding-left: 10px;
+}
+
+.wrapper .sidebar ul li a .fas {
+  width: 25px !important
+}
+
+.wrapper .sidebar ul li a .far {
+  width: 25px !important
+}
+
+.wrapper .sidebar ul li:hover {
+  background: #311B92
+}
+
+.wrapper .sidebar ul li a:hover {
+  color: #fff;
+  text-decoration: none
 }

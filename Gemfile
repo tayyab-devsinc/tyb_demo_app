@@ -40,6 +40,7 @@ gem 'rmagick'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
+gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'parsley-rails'
 gem 'pundit'
