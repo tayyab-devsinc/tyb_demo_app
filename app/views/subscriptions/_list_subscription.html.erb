@@ -1,0 +1,17 @@
+<% @subscriptions.each { |subscription| %>
+  <tr>
+    <td><%= subscription&.created_at.strftime('%F') %></td>
+    <td><%= subscription&.user.name %></td>
+    <td><%= link_to subscription&.plan&.name, subscription.plan %></td>
+    <td><%= subscription.billing_day %></td>
+    <td>
+      <%= link_to 'UnSubscribe', subscription, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% if policy(:subscription).charge? && charge_able?(subscription) %>
+        |
+        <%= link_to 'Charge', subscription_charge_path(subscription), method: :post %>
+      <% end %>
+      |
+      <%= link_to 'Usages', subscription_usages_path(subscription), method: :get %>
+    </td>
+  </tr>
+<% } %>
