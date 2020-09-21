@@ -7,6 +7,6 @@ class Transaction < ApplicationRecord
   private
 
   def send_transaction
-    InvoiceMailer.with(current_user_id: user_id, transaction_id: id).invoice_email(user_id, id).deliver_later
+    InvoiceMailer.with(current_user_id: user_id, transaction_id: id).invoice_email(user_id, id).deliver_now
   end
 end

@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   get '/about', to: 'static_pages#about'
 
+  get '*unknown_path', to: 'static_pages#home'
+
   root 'static_pages#home'
 end

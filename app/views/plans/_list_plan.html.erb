@@ -5,8 +5,8 @@
     <td><%= plan_features(plan) %></td>
     <% if policy(:plan).update? %>
       <td>
-        <%= link_to 'Edit', edit_plan_path(plan) %>
-        <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'} %>
+        <%= link_to link_to '<i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i>'.html_safe, edit_plan_path(plan) %>
+        <%= link_to link_to '<i class="fa fa-trash text-danger" data-toggle="tooltip" title="Delete"></i>'.html_safe, plan, method: :delete, data: {confirm: 'Are you sure?'} %>
       </td>
     <% else %>
       <% if current_user&.subscribed?(plan.id) %>
