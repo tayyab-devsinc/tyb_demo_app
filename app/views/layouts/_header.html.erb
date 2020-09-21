@@ -2,18 +2,6 @@
   <div class='container'>
     <%= link_to 'TYB APP', home_path, id: 'logo' %>
     <nav>
-      <% if user_signed_in? %>
-        <ul class='nav navbar-nav'>
-          <li><%= link_to 'Home', home_path %></li>
-          <li><%= link_to 'Plans', plans_path %></li>
-          <% if current_user.admin? %>
-            <li><%= link_to 'Features', features_path %></li>
-          <% end %>
-          <li><%= link_to 'Subscriptions', subscriptions_path %></li>
-          <li><%= link_to 'Transactions', transactions_path %></li>
-          <li><%= link_to 'Usages', subscriptions_path %></li>
-        </ul>
-      <% end %>
       <ul class='nav navbar-nav navbar-right'>
         <% if user_signed_in? %>
           <li class='dropdown'>
@@ -32,5 +20,7 @@
       </ul>
     </nav>
   </div>
+  <% if user_signed_in? %>
   <%= render 'layouts/sidebar' %>
+  <% end %>
 </header>

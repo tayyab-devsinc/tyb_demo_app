@@ -1,12 +1,14 @@
 <div class="wrapper d-flex">
   <div class="sidebar">
     <ul>
-      <li><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
-      <li><a href="#"><i class="fa fa-stack-exchange"></i>Features</a></li>
-      <li><a href="#"><i class="fa fa-bars"></i>Plans</a></li>
-      <li><a href="#"><i class="fa fa-cubes"></i>Subscriptions</a></li>
-      <li><a href="#"><i class="fa fa-database"></i>Transactions</a></li>
-      <li><a href="#"><i class="fa fa-tasks"></i>Usage</a></li>
+      <li><%= link_to '<i class="fa fa-home"></i> Home'.html_safe, home_path %></li>
+      <li><%= link_to '<i class="fa fa-bars"></i> Plans'.html_safe, plans_path %></li>
+      <% if current_user.admin? %>
+        <li><%= link_to '<i class="fa fa-stack-exchange"></i> Features'.html_safe, features_path %></li>
+      <% end %>
+      <li><%= link_to '<i class="fa fa-cubes"></i> Subscriptions'.html_safe, subscriptions_path %></li>
+      <li><%= link_to '<i class="fa fa-database"></i> Transactions'.html_safe, transactions_path %></li>
+      <li><%= link_to '<i class="fa fa-tasks"></i> Usages'.html_safe, subscriptions_path %></li>
       <li><a href="#"><i class="fa fa-users"></i>Users</a></li>
     </ul>
   </div>

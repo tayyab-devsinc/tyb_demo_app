@@ -1,0 +1,28 @@
+<% @plans.each { |plan| %>
+  <div class="col-md-3">
+    <div class="<%= plan_class(plan.id) %>">
+      <div class="plan-price">
+        <h3><%= plan.name %></h3> <span class="plan-currency">$</span>
+        <span class="value"><%= plan.monthly_fee %></span>
+        <span class="period">/ per month</span>
+      </div>
+      <div class="plan-features">
+        <ul>
+          <% plan.features.each do |fr| %>
+            <li><%= fr.name %></li>
+          <% end %>
+        </ul>
+        <% if policy(:plan).update? %>
+          <%= link_to 'Edit', edit_plan_path(plan), class: 'btn btn-primary btn-block' %>
+          <%= link_to 'Destroy', plan, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-block' %>
+        <% else %>
+          <% if current_user&.subscribed?(plan.id) %>
+            <a class="button" href="#">Already Subscribed</a>
+          <% else %>
+            <%= link_to 'Subscribe', plan_subscribe_path(plan), method: :post, class: 'button' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% } %>

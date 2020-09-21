@@ -23,12 +23,12 @@
 
 .plan.color-1 .plan-price,
 .plan.color-1 a.button {
-  background-color: #f6f6f6
+  background-color: #3acf87
 }
 
 .plan.color-2 .plan-price,
 .plan.color-2 a.button {
-  background-color: #3acf87
+  background-color: #514e9f
 }
 
 .plan.color-3 .plan-price,
@@ -68,13 +68,14 @@
 }
 
 .plan-features {
-  background: #fff;
+  background: #eee;
   border-top: none;
   padding: 12px 0 0
 }
 
 .plan-features ul li {
   padding: 8px 0;
+  margin-left: 16px;
   text-align: left
 }
 
@@ -128,6 +129,3 @@
   border: 1px solid #f6f6f6
 }
 
-.button {
-  margin-bottom: 100px
-}
