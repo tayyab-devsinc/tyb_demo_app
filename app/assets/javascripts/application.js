@@ -14,11 +14,6 @@
 //= require jquery
 //= require bootstrap
 //= require rails-ujs
-//= require dataTables/jquery.dataTables
 //= require turbolinks
 //= require parsley
 //= require_tree .
-
-$(document).ready(function() {
-    $('#dTable').dataTable();
-});
