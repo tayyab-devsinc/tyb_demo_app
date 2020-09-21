@@ -1,9 +1,9 @@
 <% @subscriptions.each { |subscription| %>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="card mx-auto">
       <div class="card-body">
         <h3 class="card-title"><%= subscription&.plan&.name %></h3>
-        <h6 class="card-subtitle mb-2 text-muted">Subscription date : <%= subscription.created_at.strftime('%F') %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Date : <%= subscription.created_at.strftime('%F') %></h6>
         <div class="row">
           <div class="col-md-12">
             <p class="text-muted">Price: <b><%= subscription&.plan&.monthly_fee %></b></p>
