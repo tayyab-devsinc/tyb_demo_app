@@ -103,7 +103,6 @@ a:link {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .125);
   border-radius: .25rem;
   border: none;
   cursor: pointer;
@@ -125,9 +124,9 @@ a:link {
   background-clip: border-box;
   border: 1px solid #d2d2dc;
   border-radius: 11px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
-  box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+  -webkit-box-shadow: 0 0 5px 0 rgb(249, 249, 250);
+  -moz-box-shadow: 0 0 5px 0 rgba(212, 182, 212, 1);
+  box-shadow: 0 0 5px 0 rgb(161, 163, 164)
 }
 
 .card .card-body {
