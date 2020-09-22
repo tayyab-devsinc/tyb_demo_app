@@ -13,6 +13,10 @@ class Subscription < ApplicationRecord
     subscription_transaction if billing_day == Date.today.day
   end
 
+  def transaction_exists?
+    transactions.where('created_at::date = ?', Date.today).exists?
+  end
+
   private
 
   def set_billing_day
@@ -20,7 +24,7 @@ class Subscription < ApplicationRecord
   end
 
   def subscription_transaction
-    transactions.create(user_id: user_id, amount: monthly_fee_calculation)
+    transactions.create(user_id: user_id, amount: monthly_fee_calculation) unless transaction_exists?
   end
 
   def monthly_fee_calculation

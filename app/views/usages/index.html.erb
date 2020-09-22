@@ -1,6 +1,6 @@
 <% provide(:title, 'Usages') %>
 <h1>Usages</h1>
-<% if current_user.admin? %>
+<% if policy(:usage).new? %>
   <div class='col-md-3'>
     <%= button_to 'Add Usage', new_subscription_usage_path, method: :get, class: 'btn btn-primary' %>
     <br>
@@ -13,7 +13,7 @@
     <th>Feature</th>
     <th>Features Limit</th>
     <th>Features Used</th>
-    <% if current_user.admin? %>
+    <% if policy(:usage).update? %>
       <th>Actions</th>
     <% end %>
   </tr>

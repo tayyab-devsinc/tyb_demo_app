@@ -9,7 +9,7 @@
       <th>Code</th>
       <th>Price</th>
       <th>Units</th>
-      <% if current_user.admin? %>
+      <% if policy(:plan).update? %>
         <th>Actions</th>
       <% end %>
     </tr>

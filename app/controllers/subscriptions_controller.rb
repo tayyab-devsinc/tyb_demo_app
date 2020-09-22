@@ -3,11 +3,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, except: [:index]
 
   def index
-    @subscriptions = if current_user.admin?
-                       Subscription.includes(:plan).paginate(page: params[:page], per_page: 10)
-                     else
-                       current_user.subscriptions.includes(:plan).paginate(page: params[:page], per_page: 10)
-                     end
+    @subscriptions = policy_scope(Subscription).paginate(page: params[:page], per_page: 10)
   end
 
   def destroy
@@ -28,22 +24,10 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_url
   end
 
-  def create_usage
-    if @subscription.usages.create(usage_params)
-      flash[:success] = 'Usage Added'
-    else
-      flash[:danger] = 'Error occurred, Try Again'
-    end
-    redirect_to subscriptions_url
-  end
-
   private
-
-  def usage_params
-    params.require(:usage).permit(:feature_id, :feature_count)
-  end
 
   def set_subscription
     @subscription = Subscription.find_by_id(params[:id] || params[:subscription_id])
+    authorize @subscription
   end
 end

@@ -4,7 +4,7 @@
   <td><%= usage.feature.name %></td>
   <td><%= usage.feature.max_unit_limit %></td>
   <td><%= usage.feature_count %></td>
-  <% if current_user.admin? %>
+  <% if policy(:usage).update? %>
     <td><%= link_to 'Add', edit_subscription_usage_path(usage.subscription, usage) %></td>
   <% end %>
 </tr>
