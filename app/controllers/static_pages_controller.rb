@@ -1,16 +1,9 @@
 class StaticPagesController < ApplicationController
   before_action :set_counts, only: [:home]
   before_action :authenticate_user!, only: [:home]
+
   def home
-  end
-
-  def help
-  end
-
-  def contact
-  end
-
-  def about
+    @transactions = policy_scope(Transaction).paginate(page: params[:page], per_page: 10)
   end
 
   private
