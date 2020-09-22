@@ -1,5 +1,4 @@
 class InvoiceMailer < ApplicationMailer
-
   default from: 'muhammadt.tayyab@devsinc.com'
 
   def invoice_email(current_user_id, transaction_id)
