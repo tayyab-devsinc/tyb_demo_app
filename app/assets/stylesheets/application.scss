@@ -32,7 +32,8 @@ body {
 
 .main {
   margin-left: 180px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+  margin-bottom: 30px; /* Same as the width of the sidebar */
+  padding: 10px 10px;
   width: 84%;
 }
 
@@ -98,14 +99,15 @@ p {
 }
 
 footer {
-  width: 84%;
+  z-index: 3;
+  width: 86%;
   margin-left: 180px;
-  padding: 5px 5px 5px 5px;
+  padding: 5px 5px 0px 15px;
   position: fixed;
   bottom: 0;
   border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-
+  color: $gray-medium-light;
+  background-color: #000;
   a {
     color: $gray;
 
