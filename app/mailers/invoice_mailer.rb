@@ -1,5 +1,6 @@
 class InvoiceMailer < ApplicationMailer
-  default from: 'muhammadt.tayyab@devsinc.com'
+
+  default from: ENV["google_email"]
 
   def invoice_email(current_user_id, transaction_id)
     @user = User.find_by_id(current_user_id)

@@ -1,1 +1,31 @@
-Welcome
+<% if user_signed_in? %>
+  <div class="row">
+    <div class="four col-md-3">
+      <div class="counter-box colored card-inner"><i class="fa fa-stack-exchange"></i>
+        <span class="counter"><%= @counts[:feature_count] %></span>
+        <p>Features</p>
+      </div>
+    </div>
+    <div class="four col-md-3">
+      <div class="counter-box colored card-inner"><i class="fa fa-bars"></i>
+        <span class="counter"><%= @counts[:plan_count] %></span>
+        <p>Plans</p>
+      </div>
+    </div>
+    <div class="four col-md-3">
+      <div class="counter-box colored card-inner"><i class="fa fa-cubes"></i>
+        <span class="counter"><%= @counts[:subscription_count] %></span>
+        <p>Subscriptions</p>
+      </div>
+    </div>
+    <div class="four col-md-3">
+      <div class="counter-box colored card-inner"><i class="fa fa-users"></i>
+        <span class="counter"><%= @counts[:user_count] %></span>
+        <p>Users</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <%= render :template => "transactions/index" %>
+  </div>
+<% end %>

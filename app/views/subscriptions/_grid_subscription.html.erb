@@ -1,0 +1,24 @@
+<% @subscriptions.each { |subscription| %>
+  <div class="col-md-4">
+    <div class="card mx-auto">
+      <div class="card-body">
+        <h3 class="card-title"><%= subscription&.plan&.name %></h3>
+        <h6 class="card-subtitle mb-2 text-muted">Date : <%= subscription.created_at.strftime('%F') %></h6>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-muted">Price: <b><%= subscription&.plan&.monthly_fee %></b></p>
+            <p class="text-muted">Billing Day: <b><%= subscription&.billing_day %></b></p>
+            <p class="text-muted">Features:<br> <b><%= plan_features(subscription&.plan) %></b></p>
+          </div>
+        </div>
+      </div>
+      <% if policy(:subscription).charge? && charge_able?(subscription) %>
+        <%= button_to 'Charge', subscription_charge_path(subscription), method: :post, class: 'btn btn-primary' %>
+        <hr>
+      <% end %>
+      <%= button_to 'View Usages', subscription_usages_path(subscription), method: :get, class: 'btn btn-primary' %>
+      <hr>
+      <%= button_to 'Cancel Subscription', subscription, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+    </div>
+  </div>
+<% } %>

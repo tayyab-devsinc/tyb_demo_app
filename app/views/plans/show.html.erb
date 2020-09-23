@@ -1,20 +1,22 @@
 <% provide(:title, @plan.name) %>
 <div class='row'>
-  <h1><%= @plan.name %></h1>
-  <h2>Fee: <%= @plan.monthly_fee %></h2>
-  <h3>Features</h3>
-  <table class='table'>
-    <tr>
-      <th>Name</th>
-      <th>Code</th>
-      <th>Price</th>
-      <th>Units</th>
-      <% if policy(:plan).update? %>
-        <th>Actions</th>
-      <% end %>
-    </tr>
-    <tbody class='tbody'>
-    <%= render @plan.features %>
-    </tbody>
-  </table>
+  <div class='container'>
+    <h1><%= @plan.name %></h1>
+    <h2>Fee: <%= @plan.monthly_fee %></h2>
+    <h3>Features</h3>
+    <table class='table table-bordered'>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Price</th>
+        <th>Units</th>
+        <% if policy(:plan).update? %>
+          <th>Actions</th>
+        <% end %>
+      </tr>
+      <tbody class='tbody'>
+        <%= render @plan.features %>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -5,8 +5,8 @@
   <td><%= feature.max_unit_limit %></td>
   <% if policy(:feature).update? %>
     <td>
-      <%= link_to 'Edit', edit_feature_path(feature) %>
-      <%= link_to 'Destroy', feature, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <%= link_to '<i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i>'.html_safe, edit_feature_path(feature) %>
+      <%= link_to '<i class="fa fa-trash text-danger" data-toggle="tooltip" title="Delete"></i>'.html_safe, feature, method: :delete, data: {confirm: 'Are you sure?'} %>
     </td>
   <% end %>
 </tr>

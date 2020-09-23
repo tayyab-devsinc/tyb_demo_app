@@ -1,15 +1,22 @@
 <% provide(:title, 'Subscriptions') %>
 <h1>All Subscriptions</h1>
-<table class='table'>
-  <tr>
-    <th>Subscription Date</th>
-    <th>User</th>
-    <th>Plan</th>
-    <th>Billing Day</th>
-    <th>Actions</th>
-  </tr>
-  <tbody class='tbody'>
-    <%= render @subscriptions %>
-  </tbody>
-</table>
-<%= will_paginate %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span8 well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#grid" data-target="#grid" data-toggle="tab">Grid</a></li>
+        <li><a href="#list" data-target="#list" data-toggle="tab">List</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active fade in" id="grid">
+          <div class="row">
+            <%= render 'grid' %>
+          </div>
+        </div>
+        <div class="tab-pane" id="list">
+          <%= render 'list' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

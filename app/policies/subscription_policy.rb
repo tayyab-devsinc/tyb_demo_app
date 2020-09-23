@@ -9,5 +9,9 @@ class SubscriptionPolicy < ApplicationPolicy
     end
   end
 
-  permit_admin_to :charge, :destroy
+  permit_admin_to :charge
+
+  def destroy?
+    true
+  end
 end
